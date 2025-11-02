@@ -1,6 +1,6 @@
 &lt;!-- tests/test-plan.md --&gt;
 # 📋 Test Plan – Book Store App QA Project  
-**Team:** `&lt;your-team-name&gt;`  
+**Team:** `PLP Testers`  
 **Version:** 1.0  
 **Date:** 2025-11-03  
 
@@ -41,10 +41,10 @@ Focus on risk-based coverage: cart → checkout → payment flow, accessibility,
 ## 4. Environments
 | Tier | URL | Browsers | Devices | Throttling |
 |------|-----|----------|---------|------------|
-| Local | `http://localhost:3000` | Chrome 130, Firefox 132, Safari 17 | MacBook Air M2, iPhone 14, Pixel 7 | None |
+| Local | `http://localhost:3000` | Chrome Version 142.0.7444.60 (Official Build) (64-bit),| Windows 11 14inch Laptop, samsung A34 | None |
 
 
-Screen-reader combo: NVDA 2024 + Firefox Win, VoiceOver + Safari iOS.
+
 
 ---
 
@@ -111,8 +111,8 @@ Screen-reader combo: NVDA 2024 + Firefox Win, VoiceOver + Safari iOS.
 ## 10. Sign-Off
 | Role | Name | Signature | Date |
 |------|------|-----------|------|
-| QA Lead | `&lt;name&gt;` | | |
-| Dev Lead | `&lt;name&gt;` | | |
-| Product Owner | `&lt;name&gt;` | | |
+| QA Lead | Asmamaw Yismaw | AY | Nov 02, 2025 |
+| Dev Lead | Jostina Mwamburi | JM | Nov 02, 2025 |
+| Product Owner | Whitney Shisia | WS | Nov 02, 2025 |
 
 ---
