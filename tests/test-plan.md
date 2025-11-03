@@ -41,7 +41,7 @@ Focus on risk-based coverage: cart → checkout → payment flow, accessibility,
 ## 4. Environments
 | Tier | URL | Browsers | Devices | Throttling |
 |------|-----|----------|---------|------------|
-| Local | `http://localhost:3000` | Chrome Version 142.0.7444.60 (Official Build) (64-bit),| Windows 11 14inch Laptop, samsung A34 | None |
+| Local | `http://localhost:3000` | Chrome Version 142.0.7444.60 (Official Build) (64-bit),| Windows 11 14inch Laptop, samsung A34,iphone 12 pro | None |
 
 
 
