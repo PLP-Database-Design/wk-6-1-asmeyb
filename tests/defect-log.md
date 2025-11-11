@@ -1,4 +1,3 @@
-&lt;!-- tests/defect-log.md --&gt;
 # 🐞 Defect Log – Book Store App QA Project  
 **Team:** `&lt;your-team-name&gt;`  
 **Current as of:** 2025-11-11  
