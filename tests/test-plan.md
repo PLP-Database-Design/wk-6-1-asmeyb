@@ -1,92 +1,101 @@
+&lt;!-- tests/test-plan.md --&gt;
 # 📋 Test Plan – Book Store App QA Project  
-**Team:** `PLP Testers`  
-**Version:** 1.0  
-**Date:** 2025-11-03  
+**Team:** PLP Testers  
+**Version:** 1.1 (rewritten)  
+**Date:** 2025-11-11  
 
 ---
 
 ## 1. Objective & Scope
-Validate that the React Book Store meets stated functional requirements (FR), non-functional requirements (NFR) and intentional defect seeds, **before** the Nov 18 production release.  
-Focus on risk-based coverage: cart → checkout → payment flow, accessibility, performance budgets, cross-browser compatibility, and security hygiene.
+Prove—through risk-based testing—that the React Book Store satisfies every functional (FR) and non-functional (NFR) requirement, including 10 intentionally seeded defects, before the 18 Nov 2025 production release.  
+Core focus: cart → checkout → payment flow, WCAG 2.1 AA, performance budgets (LCP ≤ 2.5 s, TTI ≤ 1 s), cross-browser stability, and security hygiene.
 
 ---
 
-## 2. In-Scope Features (mapped to FR codes)
-|S/n| Feature Area | ID | Description |
-|1|--------------|----|-------------|
-|3| Catalog | FR-C01 | Browse, search, lazy images |
-|4| Cart | FR-O01–O03 | Add, update qty, subtotal, stock guard |
-|5| Checkout | FR-O04–O05 | Wizard, validation, Paystack payment |
-|6| Orders | FR-O06 | Order history, status lifecycle |
-|7| Admin | FR-M01–M05 | CRUD, inventory, moderation |
-|8|Reviews | FR-U01–U03 | Post-purchase rating, sanitization |
-|9| Returns | FR-R01–R03 | 7-day window, refund simulation |
-|10|Notifications | FR-N01–N02 | Bell, unread count, mark read |
-|11| A11y | FR-X01 | WCAG 2.1 AA compliance |
-|12|Performance | FR-X02 | LCP ≤ 2.5 s, TTI ≤ 1 s |
-|13|Security | FR-S01–S03 | XSS prevention, URL whitelist |
-||Intentional Defects | — | 10 seeded bugs (currency, rounding, XSS, etc.) |
+## 2. In-Scope Features (FR map)
+|S/N|| Area | IDs | Description |
+|---||------|-----|-------------|
+| 1 || Catalog | FR-C01 | browse, search, lazy images |
+| 2 || Cart | FR-O01–O03 | add, update qty, sub-total, stock guard |
+| 3 || Checkout | FR-O04–O05 | wizard, validation, Paystack payment |
+| 4 || Orders | FR-O06 | history, status life-cycle |
+| 5 || Admin | FR-M01–M05 | CRUD, inventory, moderation |
+| 6 || Reviews | FR-U01–U03 | post-purchase rating, sanitisation |
+| 7 || Returns | FR-R01–R03 | 7-day window, refund simulation |
+| 8 || Notifications | FR-N01–N02 | in-app bell, unread count, mark read |
+| 9 || A11y | FR-X01 | WCAG 2.1 AA |
+| 10 || Performance | FR-X02 | LCP ≤ 2.5 s, TTI ≤ 1 s |
+| 11 || Security | FR-S01–S03 | XSS prevention, URL whitelist |
+| 12 || Seeded Defects | — | 10 bugs (currency, rounding, XSS, etc.) |
 
 ---
 
 ## 3. Out-of-Scope
-- Native mobile app (iOS/Android)  
-- Email/SMS notification delivery (only in-app)  
+- Native mobile apps (iOS/Android)  
+- Email/SMS delivery (in-app only)  
 - PCI-DSS audit of Paystack SDK  
-- Load testing &gt; 500 concurrent users (covered in NFR but deferred to Phase-2)
+- Load testing &gt; 500 concurrent users (deferred to Phase-2)
 
 ---
 
 ## 4. Environments
 | Tier | URL | Browsers | Devices | Throttling |
 |------|-----|----------|---------|------------|
-| Local | `http://localhost:3000` | Chrome Version 142.0.7444.60 (Official Build) (64-bit),| Windows 11 14inch Laptop, samsung A34,iphone 12 pro | None |
+| Local | `http://localhost:3000` | Chrome 142, Firefox 132, Safari 17 | Win-11 14″, Samsung A34, iPhone 12 Pro | none |
+| Staging | `https://bookstore-staging.netlify.app` | + Edge 129 | add Galaxy Tab S8 | Fast-3G |
 
-
-
+Screen-reader combo: NVDA 2024 + Firefox, VoiceOver + Safari iOS.
 
 ---
 
-## 5. Tools & Extensions
-- Test case mgmt: Jira  
-- Exploratory notes: RapidReporter 2.3  
-- A11y: axe-core 4.9, WAVE, Lighthouse a11y audit  
-- Perf: Lighthouse CI, WebPageTest, React Profiler  
-- Network: MSW 2.1 for mock latency/errors  
-- Automation: Cypress 13 (e2e), React Testing Library (unit),Selenium  
-- CSV validation:  `pytest`  
-- Security: OWASP ZAP baseline scan
-
+## 5. Tools
+- **Test mgmt:** Jira Kanban  
+- **Exploratory:** RapidReporter 2.3  
+- **A11y:** axe-core 4.9, WAVE, Lighthouse  
+- **Perf:** Lighthouse-CI, WebPageTest, React Profiler  
+- **Network:** MSW 2.1 for mock latency/errors  
+- **Automation:** Cypress 13 (e2e), React Testing Library (unit)  
+- **CSV validation:** Python pytest  
+- **Security:** OWASP ZAP baseline scan
 
 ---
 
 ## 6. Risks & Mitigations
 | Risk | Impact | Likelihood | Mitigation |
 |------|--------|------------|------------|
-| Paystack test key expires | High | Low | Alert 3 days before; key rotation script |
-| Stock race condition | Major | Medium | Add pessimistic UI lock, test with 2 tabs |
-|Currency Mismatch (UI vs. Paystack)|Major|Medium|Explicitly test with REACT_APP_CURRENCY set to a non-default value (e.g., USD) and verify UI presentation matches the gateway's expected currency.|
-| CSV export decimal comma | Minor | High | Post-process with `locale=EN-us` |
-| Seeded XSS flagged by client | Major | Low | Document in test report; use safe markdown lib |
+| Paystack test key expires | High | Low | calendar alert + key-rotation script |
+| Stock race condition | Major | Medium | pessimistic UI lock + dual-tab test |
+| Currency mismatch (UI vs gateway) | Major | Medium | explicit USD test run |
+| CSV export decimal comma | Minor | High | force `locale=en-US` in export util |
+| Seeded XSS flagged by client | Major | Low | documented in report; safe-markdown lib |
 
 ---
 
-## 7. Test Types & Coverage Targets
-| **Test Type**                      | **Description**                                                                                                                                                       |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Functional Testing**             | Ensures all bookstore features (book listing, add to cart, checkout, Paystack integration, admin guard, and routing) work correctly according to requirements.        |
-| **Accessibility (a11y) Testing**   | Checks that all UI elements are accessible, properly labeled, and usable with assistive technologies such as screen readers and keyboard navigation.                  |
-| **Performance Testing**            | Measures the app’s load speed, responsiveness, and stability — ensuring efficient performance under normal and heavy usage.                                           |
-| **Compatibility Testing**          | Verifies the app behaves consistently across different browsers (Chrome, Firefox, Safari, Edge) and on both desktop and mobile devices.                               |
-| **Hygiene / Code Quality Testing** | Focuses on code cleanliness, adherence to best practices, and security hygiene — checking for vulnerabilities, outdated dependencies, and coding standard compliance. |
+## 7. Test Types & Targets
+| Type | Coverage Target |
+|------|-----------------|
+| Functional | 100 % P1 flows, 80 % P2 |
+| Accessibility | 0 critical WCAG 2.1 AA violations |
+| Performance | LCP ≤ 2.5 s, TTI ≤ 1 s, Lighthouse 90+ |
+| Compatibility | zero P1 bugs on latest 2 Chrome, Firefox, Safari, Edge |
+| Security | zero high-severity OWASP ZAP alerts |
+| Exploratory | ≥ 5 sessions/week, 30 bugs logged |
 
+---
 
-## 8. Entry & Exit Criteria
-| **Criteria Type**  | **Description**                                                                                                                                                                                                                                                                                                                   |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Entry Criteria** | - All bookstore features are developed and merged into the main branch.<br>- Test environment (development or staging) is set up and stable.<br>- Test data (books, users, payment sandbox) prepared.<br>- Functional build passes without critical errors.<br>- Required tools (browsers, a11y and performance tools) available. |
-| **Exit Criteria**  | - All planned test cases executed and documented.<br>- No critical or high-severity defects remain unresolved.<br>- Accessibility, performance, and compatibility targets met.<br>- Code review and hygiene checks completed.<br>- Final test summary reviewed and approved by QA lead or instructor.                             |
+## 8. Entry / Exit Criteria
+**Entry**  
+- Code frozen 24 h before cycle  
+- Staging deployment green on CI  
+- Test data seeded (`/data/seed.json` v1.3)
 
+**Exit**  
+- All P1 defects closed or accepted  
+- No critical a11y or security issues  
+- Performance budget met on 3 consecutive runs  
+- ≥ 90 % FR traceability with evidence
+
+---
 
 ## 9. Deliverables & Schedule
 | Artifact | Due | Owner |
@@ -100,10 +109,8 @@ Focus on risk-based coverage: cart → checkout → payment flow, accessibility,
 ---
 
 ## 10. Sign-Off
-| Role | Name | Signature | Date |
-|------|------|-----------|------|
-| QA Lead | Asmamaw Yismaw | AY | Nov 02, 2025 |
-| Risk Analytics | Jostina Mwamburi | JM | Nov 02, 2025 |
-| Text Executor | Whitney Shisia | WS | Nov 04, 2025 |
-
----
+|S/N|| Role | Name | Signature | Date |
+|----||------|------|-----------|------|
+| 1 || QA Lead | Asmamaw Yismaw | AY | 02 Nov 2025 |
+| 2 || Risk Analyst | Jostina Mwamburi | JM | 02 Nov 2025 |
+| 3 || Test Executor | Whitney Shisia | WS | 04 Nov 2025 |
