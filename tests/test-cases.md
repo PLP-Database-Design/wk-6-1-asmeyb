@@ -99,92 +99,104 @@ Screenshot of empty-cart state.
 
 ## ID: TC-006
 ## Title: Navigate to checkout wizard
-## Pre-conditions:
+**pre-condititions**:
 Cart contains books
 ## Steps:
 
 i.Go to catalog
 ii.select by any book
 iii.click checkout
-## Expected Result: 
+**Expected Result**: 
 Checkout wizard loads with cart summary
-## Post-conditions: 
+**Post-conditions**: 
 checkout details 
-## Evidence: 
+**Evidence**: 
 Screenshot of checkout :
 
 ## ID: TC-007
 ## Title: Mock payment via Paystack test card
-## Pre-conditions: 
+**Pre-conditions**: 
 Checkout page loaded with items; test mode active
-## Steps:
+ **Steps**:
 
 i.Enter Paystack test card number 4084084084084081
 
 ii.Enter CVV, expiry, and PIN
 
 iii.Submit payment
-## Expected Result:
+**Expected Result**:
 Payment success flow triggered
-## Post-conditions: 
+
+**Post-conditions**: 
 app.orders updated in localStorage
-## Evidence: 
+
+**Evidence**: 
 Screenshot of payment success confirmation
 
 ## ID: TC-008
 ## Title: Access admin page as admin
-## Pre-conditions: 
+**Pre-conditions**: 
 localStorage.setItem('app.user', JSON.stringify({ role: 'admin' }))
-## Steps:
+
+**Steps**:
 
 Navigate to /admin
-## Expected Result: 
+**Expected Result**: 
 Admin page content displayed
-## Post-conditions:
+
+**Post-conditions**:
 None
 
-## Evidence: Screenshot of admin console
+**Evidence**: 
+Screenshot of admin console
 
 ## ID: TC-009
 ## Title: Cart persistence after reload
-## Pre-conditions: 
+
+**Pre-conditions**: 
 Cart contains books
 ## Steps:
 
 i.Reload /cart page
-## Expected Result:
+**Expected Result**:
 Items remain in cart after reload
-## Post-conditions: 
+**Post-conditions**: 
 app.cart persisted in localStorage
-## Evidence: 
+ **Evidence**: 
 Screenshot of cart after reload
 
 ## ID: TC-010
 ## Title: Checkout without items in cart
-## Pre-conditions: 
+**Pre-conditions**: 
 Cart is empty
-## Steps:
+**Steps**:
 
 i.Navigate to /checkout
-## Expected Result: 
+**Expected Result**: 
 Warning/error message displayed; cannot proceed
-## Post-conditions:
+
+**Post-conditions**:
 None
-## Evidence:
+
+**Evidence**:
 Screenshot of warning message:
 
 ## ID: TC-011
 ## Title: Currency displayed matches Paystack util
-## Pre-conditions: 
+**Pre-conditions**: 
 Checkout with currency set (e.g., NGN)
-## Steps:
+
+**Steps**:
 
 i.View total in cart or checkout page
+
 ## Expected Result: 
 Displayed currency matches Paystack currency setting
-## Post-conditions: 
+
+**Post-conditions**: 
 None
-## Evidence:
+
+**Evidence**:
 Screenshot of currency display
 
 
