@@ -208,6 +208,131 @@ None
 Screenshot of currency display
 
 
+##  A. Manual Test Scripts
+
+| **TC ID** | **Title**                                  | **Pre-conditions**                               | **Test Steps**                                                                       | **Expected Result**                                                  | **Post-conditions**                |
+| --------- | ------------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------- | ---------------------------------- |
+| TC-001    | Search by Partial Title (Case-Insensitive) | Catalog contains “The Great Gatsby”              | 1. Navigate to `/catalog` <br> 2. Enter `"  the Great gatsby "` <br> 3. Click Search | Only *The Great Gatsby* displayed; no errors; trimmed query retained | None                               |
+| TC-002    | Redirect from Root to Catalog              | App running on `localhost:3000`                  | 1. Navigate to `/`                                                                   | Redirects to `/catalog` without full reload                          | Catalog page loaded                |
+| TC-003    | Add Book to Cart                           | Catalog loaded with books                        | 1. Click “Buy Now”                                                                   | Cart badge increments; book appears in cart                          | `app.cart` in localStorage updated |
+| TC-004    | Update Quantity in Cart                    | Cart has ≥1 book                                 | 1. Go to `/cart` <br> 2. Click “+”                                                   | Subtotal recalculates correctly (2 decimals)                         | localStorage updated               |
+| TC-005    | Remove Book from Cart                      | Cart has ≥1 book                                 | 1. Click “Remove”                                                                    | Item disappears; subtotal updates; empty state if last item          | localStorage updated               |
+| TC-006    | Navigate to Checkout Wizard                | Cart contains books                              | 1. Go to `/catalog` <br> 2. Click “Buy Now” <br> 3. Click “Checkout”                 | Checkout wizard loads with cart summary                              | Checkout details visible           |
+| TC-007    | Mock Payment via Paystack Test Card        | Checkout page open, test mode active             | 1. Enter card `4084084084084081` <br> 2. Enter CVV, expiry, PIN <br> 3. Submit       | Payment success flow triggered                                       | `app.orders` updated               |
+| TC-008    | Access Admin Page as Admin                 | `app.user` = `{ role: 'admin' }` in localStorage | 1. Navigate to `/admin`                                                              | Admin console displays                                               | None                               |
+| TC-009    | Cart Persistence After Reload              | Cart has books                                   | 1. Reload `/cart`                                                                    | Items persist after reload                                           | localStorage persists              |
+| TC-010    | Checkout Without Items in Cart             | Cart empty                                       | 1. Navigate to `/checkout`                                                           | Warning message: “Your cart is empty.”                               | None                               |
+| TC-011    | Currency Display Matches Paystack Util     | Currency = NGN                                   | 1. View total in cart or checkout                                                    | Currency symbol/format matches Paystack                              | None                               |
+
+---
+
+## 🤖 B. Automated Test Scripts (Cypress)
+
+```javascript
+describe('📚 Book Store App – PLP Testers Suite', () => {
+
+  beforeEach(() => {
+    cy.viewport(1280, 720);
+  });
+
+  it('TC-001: Search by Partial Title (Case-Insensitive)', () => {
+    cy.visit('/catalog');
+    cy.get('input[placeholder="Search"]').type('  the Great gatsby ');
+    cy.get('button[data-testid="search"]').click();
+    cy.contains('The Great Gatsby').should('be.visible');
+    cy.get('input[placeholder="Search"]').should('have.value', 'the Great gatsby');
+  });
+
+  it('TC-002: Redirect from Root to Catalog', () => {
+    cy.visit('/');
+    cy.url().should('include', '/catalog');
+    cy.contains('Catalog').should('exist');
+  });
+
+  it('TC-003: Add Book to Cart', () => {
+    cy.visit('/catalog');
+    cy.get('button').contains('Buy Now').first().click();
+    cy.get('[data-testid="cart-badge"]').should('contain', '1');
+    cy.window().then(win => {
+      const cart = JSON.parse(win.localStorage.getItem('app.cart'));
+      expect(cart).to.have.length(1);
+    });
+  });
+
+  it('TC-004: Update Quantity in Cart', () => {
+    cy.visit('/cart');
+    cy.get('[data-testid="qty-plus"]').first().click();
+    cy.get('[data-testid="subtotal"]').invoke('text').then(text => {
+      const subtotal = parseFloat(text.replace(/[^\d.]/g, ''));
+      expect(subtotal).to.be.greaterThan(0);
+    });
+  });
+
+  it('TC-005: Remove Book from Cart', () => {
+    cy.visit('/cart');
+    cy.get('button').contains('Remove').first().click();
+    cy.get('[data-testid="cart-empty"]').should('be.visible');
+  });
+
+  it('TC-006: Navigate to Checkout Wizard', () => {
+    cy.visit('/catalog');
+    cy.get('button').contains('Buy Now').first().click();
+    cy.get('button').contains('Checkout').click();
+    cy.url().should('include', '/checkout');
+    cy.contains('Order Summary').should('exist');
+  });
+
+  it('TC-007: Mock Payment via Paystack Test Card', () => {
+    cy.visit('/checkout');
+    cy.get('input[name="cardNumber"]').type('4084084084084081');
+    cy.get('input[name="expiry"]').type('12/30');
+    cy.get('input[name="cvv"]').type('123');
+    cy.get('button').contains('Pay').click();
+    cy.contains('Payment Successful').should('exist');
+    cy.window().then(win => {
+      const orders = JSON.parse(win.localStorage.getItem('app.orders'));
+      expect(orders).to.have.length.greaterThan(0);
+    });
+  });
+
+  it('TC-008: Access Admin Page as Admin', () => {
+    cy.window().then(win => {
+      win.localStorage.setItem('app.user', JSON.stringify({ role: 'admin' }));
+    });
+    cy.visit('/admin');
+    cy.contains('Admin Dashboard').should('be.visible');
+  });
+
+  it('TC-009: Cart Persistence After Reload', () => {
+    cy.visit('/cart');
+    cy.reload();
+    cy.get('[data-testid="cart-item"]').should('exist');
+  });
+
+  it('TC-010: Checkout Without Items in Cart', () => {
+    cy.window().then(win => {
+      win.localStorage.setItem('app.cart', JSON.stringify([]));
+    });
+    cy.visit('/checkout');
+    cy.contains('Your cart is empty').should('be.visible');
+  });
+
+  it('TC-011: Currency Display Matches Paystack Util', () => {
+    cy.visit('/checkout');
+    cy.contains('NGN').should('exist'); // or check currency symbol ₦
+  });
+
+});
+```
+
+---
+
+
+
+
+
+
+
 
 
 
