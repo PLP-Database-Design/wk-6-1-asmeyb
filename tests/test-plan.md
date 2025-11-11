@@ -25,7 +25,7 @@ Focus on risk-based coverage: cart → checkout → payment flow, accessibility,
 |11| A11y | FR-X01 | WCAG 2.1 AA compliance |
 |12|Performance | FR-X02 | LCP ≤ 2.5 s, TTI ≤ 1 s |
 |13|Security | FR-S01–S03 | XSS prevention, URL whitelist |
-|14|Intentional Defects | — | 10 seeded bugs (currency, rounding, XSS, etc.) |
+||Intentional Defects | — | 10 seeded bugs (currency, rounding, XSS, etc.) |
 
 ---
 

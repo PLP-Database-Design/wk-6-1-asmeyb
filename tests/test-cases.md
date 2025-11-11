@@ -1,4 +1,4 @@
-This document outlines key functional and non-functional test cases.
+<img width="1896" height="967" alt="catalog" src="https://github.com/user-attachments/assets/af85a029-1bbd-4ee5-ba56-4fc931a285a4" />This document outlines key functional and non-functional test cases.
 
 ID: TC-001
 
@@ -21,4 +21,41 @@ The catalog view updates to show only the matching book (“The Great Adventure 
 Search query remains visible in the search bar.
 
 ## Evidence:
-Screenshot/GIF paths:<img width="1913" height="866" alt="search" src="https://github.com/user-attachments/assets/8c883f8c-3aa2-4012-93d2-9fb85a306aef" />
+Screenshot/GIF paths:
+<img width="1913" height="866" alt="search" src="https://github.com/user-attachments/assets/8c883f8c-3aa2-4012-93d2-9fb85a306aef" />
+
+
+
+ID:TC-002
+
+## Tittle:Redirect from root to catalog
+
+## Pre-conditions: App running at /; user role irrelevant
+Steps:
+
+i.Navigate to /
+
+## Expected Result: User is redirected to /catalog
+
+## Post-conditions: URL changes to /catalog
+
+## Evidence: Screenshot of /catalog page:![Uploading catalog.png…]()
+
+
+
+## ID: TC-003
+
+## Title: Add book to cart from catalog
+
+## Pre-conditions: Catalog page loaded, all book visible
+
+## Steps:
+i.Open the bookstore catalog
+ii.Click “Buy Now” on a book
+
+## Expected Result: Book is added to cart; cart badge increments
+
+## Post-conditions: app.cart in localStorage updated
+
+## Evidence: Screenshot of cart badge and localStorage
+
