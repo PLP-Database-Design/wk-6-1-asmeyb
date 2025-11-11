@@ -1,6 +1,5 @@
-&lt;!-- tests/test-plan.md --&gt;
 # 📋 Test Plan – Book Store App QA Project  
-**Team:** PLP Testers  
+**Team:** `PLP Testers`  
 **Version:** 1.1 (rewritten)  
 **Date:** 2025-11-11  
 
