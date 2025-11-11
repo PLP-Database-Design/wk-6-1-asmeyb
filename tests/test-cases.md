@@ -95,3 +95,104 @@ Item disappears; subtotal updates; if last item, cart shows empty state.
 
 **Evidence:**  
 Screenshot of empty-cart state.
+
+
+## ID: TC-006
+## Title: Navigate to checkout wizard
+## Pre-conditions:
+Cart contains books
+## Steps:
+
+i.Go to catalog
+ii.select by any book
+iii.click checkout
+## Expected Result: 
+Checkout wizard loads with cart summary
+## Post-conditions: 
+checkout details 
+## Evidence: 
+Screenshot of checkout :
+
+## ID: TC-007
+## Title: Mock payment via Paystack test card
+## Pre-conditions: 
+Checkout page loaded with items; test mode active
+## Steps:
+
+i.Enter Paystack test card number 4084084084084081
+
+ii.Enter CVV, expiry, and PIN
+
+iii.Submit payment
+## Expected Result:
+Payment success flow triggered
+## Post-conditions: 
+app.orders updated in localStorage
+## Evidence: 
+Screenshot of payment success confirmation
+
+## ID: TC-008
+## Title: Access admin page as admin
+## Pre-conditions: 
+localStorage.setItem('app.user', JSON.stringify({ role: 'admin' }))
+## Steps:
+
+Navigate to /admin
+## Expected Result: 
+Admin page content displayed
+## Post-conditions:
+None
+
+## Evidence: Screenshot of admin console
+
+## ID: TC-009
+## Title: Cart persistence after reload
+## Pre-conditions: 
+Cart contains books
+## Steps:
+
+i.Reload /cart page
+## Expected Result:
+Items remain in cart after reload
+## Post-conditions: 
+app.cart persisted in localStorage
+## Evidence: 
+Screenshot of cart after reload
+
+## ID: TC-010
+## Title: Checkout without items in cart
+## Pre-conditions: 
+Cart is empty
+## Steps:
+
+i.Navigate to /checkout
+## Expected Result: 
+Warning/error message displayed; cannot proceed
+## Post-conditions:
+None
+## Evidence:
+Screenshot of warning message:
+
+## ID: TC-011
+## Title: Currency displayed matches Paystack util
+## Pre-conditions: 
+Checkout with currency set (e.g., NGN)
+## Steps:
+
+i.View total in cart or checkout page
+## Expected Result: 
+Displayed currency matches Paystack currency setting
+## Post-conditions: 
+None
+## Evidence:
+Screenshot of currency display
+
+
+
+
+
+
+
+
+
+
