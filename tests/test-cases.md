@@ -57,7 +57,8 @@ Cart badge increments by 1; book appears in cart.
 `app.cart` key in localStorage updated.
 
 **Evidence:**  
-Screenshot of badge + localStorage (to be attached during execution).
+Screenshot of badge + localStorage :<img width="1903" height="927" alt="Screenshot (7)" src="https://github.com/user-attachments/assets/011b793c-509d-4eb8-a48b-8816ff372d83" />
+
 
 ---
 
@@ -76,7 +77,9 @@ Subtotal recalculates correctly (rounded to 2 decimals).
 `app.cart` updated.
 
 **Evidence:**  
-Screenshot of updated subtotal.
+Screenshot of updated subtotal: <img width="1899" height="901" alt="Screenshot (7)" src="https://github.com/user-attachments/assets/0fc3690f-6508-4efa-aa31-567db4e1f7e2" />
+
+
 
 ---
 
@@ -94,7 +97,8 @@ Item disappears; subtotal updates; if last item, cart shows empty state.
 `app.cart` updated.
 
 **Evidence:**  
-Screenshot of empty-cart state.
+Screenshot of empty-cart state.:<img width="1920" height="1080" alt="Screenshot (8)" src="https://github.com/user-attachments/assets/e6f2402a-3955-4a97-aeb2-792a5e64571a" />
+
 
 
 ## ID: TC-006
@@ -111,7 +115,8 @@ Checkout wizard loads with cart summary
 **Post-conditions**: 
 checkout details 
 **Evidence**: 
-Screenshot of checkout :
+Screenshot of checkout :<img width="1887" height="939" alt="Screenshot (10)" src="https://github.com/user-attachments/assets/4fbf76ce-867e-4fcb-a88f-6b4d46cca52c" />
+
 
 ## ID: TC-007
 ## Title: Mock payment via Paystack test card
@@ -124,6 +129,7 @@ i.Enter Paystack test card number 4084084084084081
 ii.Enter CVV, expiry, and PIN
 
 iii.Submit payment
+
 **Expected Result**:
 Payment success flow triggered
 
@@ -135,6 +141,7 @@ Screenshot of payment success confirmation
 
 ## ID: TC-008
 ## Title: Access admin page as admin
+
 **Pre-conditions**: 
 localStorage.setItem('app.user', JSON.stringify({ role: 'admin' }))
 
@@ -163,7 +170,8 @@ Items remain in cart after reload
 **Post-conditions**: 
 app.cart persisted in localStorage
  **Evidence**: 
-Screenshot of cart after reload
+Screenshot of cart after reload:<img width="1904" height="882" alt="Screenshot (11)" src="https://github.com/user-attachments/assets/0b3db5dc-a2c3-4756-9b3e-90fa88c54fa4" />
+
 
 ## ID: TC-010
 ## Title: Checkout without items in cart
@@ -173,13 +181,14 @@ Cart is empty
 
 i.Navigate to /checkout
 **Expected Result**: 
-Warning/error message displayed; cannot proceed
+Warning/error message displayed; your cart is empty
 
 **Post-conditions**:
 None
 
 **Evidence**:
-Screenshot of warning message:
+Screenshot of warning message:<img width="1904" height="882" alt="Screenshot (11)" src="https://github.com/user-attachments/assets/168a2e28-3a6a-4c07-934d-3ebfeeb615ab" />
+
 
 ## ID: TC-011
 ## Title: Currency displayed matches Paystack util
