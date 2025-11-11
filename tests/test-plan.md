@@ -12,20 +12,20 @@ Focus on risk-based coverage: cart → checkout → payment flow, accessibility,
 ---
 
 ## 2. In-Scope Features (mapped to FR codes)
-| Feature Area | ID | Description |
-|--------------|----|-------------|
-| Catalog | FR-C01 | Browse, search, lazy images |
-| Cart | FR-O01–O03 | Add, update qty, subtotal, stock guard |
-| Checkout | FR-O04–O05 | Wizard, validation, Paystack payment |
-| Orders | FR-O06 | Order history, status lifecycle |
-| Admin | FR-M01–M05 | CRUD, inventory, moderation |
-| Reviews | FR-U01–U03 | Post-purchase rating, sanitization |
-| Returns | FR-R01–R03 | 7-day window, refund simulation |
-| Notifications | FR-N01–N02 | Bell, unread count, mark read |
-| A11y | FR-X01 | WCAG 2.1 AA compliance |
-| Performance | FR-X02 | LCP ≤ 2.5 s, TTI ≤ 1 s |
-| Security | FR-S01–S03 | XSS prevention, URL whitelist |
-| Intentional Defects | — | 10 seeded bugs (currency, rounding, XSS, etc.) |
+|S/n| Feature Area | ID | Description |
+|1|--------------|----|-------------|
+|3| Catalog | FR-C01 | Browse, search, lazy images |
+|4| Cart | FR-O01–O03 | Add, update qty, subtotal, stock guard |
+|5| Checkout | FR-O04–O05 | Wizard, validation, Paystack payment |
+|6| Orders | FR-O06 | Order history, status lifecycle |
+|7| Admin | FR-M01–M05 | CRUD, inventory, moderation |
+|8|Reviews | FR-U01–U03 | Post-purchase rating, sanitization |
+|9| Returns | FR-R01–R03 | 7-day window, refund simulation |
+|10|Notifications | FR-N01–N02 | Bell, unread count, mark read |
+|11| A11y | FR-X01 | WCAG 2.1 AA compliance |
+|12|Performance | FR-X02 | LCP ≤ 2.5 s, TTI ≤ 1 s |
+|13|Security | FR-S01–S03 | XSS prevention, URL whitelist |
+|14|Intentional Defects | — | 10 seeded bugs (currency, rounding, XSS, etc.) |
 
 ---
 
