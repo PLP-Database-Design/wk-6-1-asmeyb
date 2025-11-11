@@ -1,5 +1,5 @@
 # ✅ Test Cases – Book Store App QA Project  
-**Team:** `&lt;PLP Testers&gt;`  
+**Team:** `PLP Testers`  
 **Last updated:– 2025-11-11
 
 ---
