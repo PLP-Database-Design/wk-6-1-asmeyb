@@ -13,20 +13,20 @@ Core focus: cart → checkout → payment flow, WCAG 2.1 AA, performance budgets
 ---
 
 ## 2. In-Scope Features (FR map)
-|S/N|| Area | IDs | Description |
-|---||------|-----|-------------|
-| 1 || Catalog | FR-C01 | browse, search, lazy images |
-| 2 || Cart | FR-O01–O03 | add, update qty, sub-total, stock guard |
-| 3 || Checkout | FR-O04–O05 | wizard, validation, Paystack payment |
-| 4 || Orders | FR-O06 | history, status life-cycle |
-| 5 || Admin | FR-M01–M05 | CRUD, inventory, moderation |
-| 6 || Reviews | FR-U01–U03 | post-purchase rating, sanitisation |
-| 7 || Returns | FR-R01–R03 | 7-day window, refund simulation |
-| 8 || Notifications | FR-N01–N02 | in-app bell, unread count, mark read |
-| 9 || A11y | FR-X01 | WCAG 2.1 AA |
-| 10 || Performance | FR-X02 | LCP ≤ 2.5 s, TTI ≤ 1 s |
-| 11 || Security | FR-S01–S03 | XSS prevention, URL whitelist |
-| 12 || Seeded Defects | — | 10 bugs (currency, rounding, XSS, etc.) |
+| Area | IDs | Description |
+|------|-----|-------------|
+| Catalog | FR-C01 | browse, search, lazy images |
+| Cart | FR-O01–O03 | add, update qty, sub-total, stock guard |
+| Checkout | FR-O04–O05 | wizard, validation, Paystack payment |
+| Orders | FR-O06 | history, status life-cycle |
+| Admin | FR-M01–M05 | CRUD, inventory, moderation |
+| Reviews | FR-U01–U03 | post-purchase rating, sanitisation |
+| Returns | FR-R01–R03 | 7-day window, refund simulation |
+| Notifications | FR-N01–N02 | in-app bell, unread count, mark read |
+| A11y | FR-X01 | WCAG 2.1 AA |
+| Performance | FR-X02 | LCP ≤ 2.5 s, TTI ≤ 1 s |
+| Security | FR-S01–S03 | XSS prevention, URL whitelist |
+| Seeded Defects | — | 10 bugs (currency, rounding, XSS, etc.) |
 
 ---
 
@@ -109,8 +109,8 @@ Screen-reader combo: NVDA 2024 + Firefox, VoiceOver + Safari iOS.
 ---
 
 ## 10. Sign-Off
-|S/N|| Role | Name | Signature | Date |
-|----||------|------|-----------|------|
-| 1 || QA Lead | Asmamaw Yismaw | AY | 02 Nov 2025 |
-| 2 || Risk Analyst | Jostina Mwamburi | JM | 02 Nov 2025 |
-| 3 || Test Executor | Whitney Shisia | WS | 04 Nov 2025 |
+| Role | Name | Signature | Date |
+|------|------|-----------|------|
+| QA Lead | Asmamaw Yismaw | AY | 02 Nov 2025 |
+| Risk Analyst | Jostina Mwamburi | JM | 02 Nov 2025 |
+| Test Executor | Whitney Shisia | WS | 04 Nov 2025 |
