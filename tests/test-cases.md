@@ -39,7 +39,8 @@ i.Navigate to /
 ## Post-conditions: URL changes to /catalog
 
 ## Evidence:
-Screenshot of /catalog page: ![Uploading catalog.png…]()
+Screenshot of /catalog page:<img width="1896" height="967" alt="catalog" src="https://github.com/user-attachments/assets/b0a34cf2-35ff-48a3-970c-cc271185624c" />
+
 
 
 
@@ -63,6 +64,38 @@ app.cart in localStorage updated
 
 ## Evidence:
 Screenshot of cart badge and localStorage:
+
+ID: TC-004
+## Title: Update quantity in cart
+## Pre-conditions:
+Cart contains at least one book
+## Steps:
+
+i.Go to /cart
+ii.Increment quantity of a book
+## Expected Result:
+Subtotal updates correctly
+## Post-conditions: 
+app.cart  updated
+## Evidence: 
+Screenshot of updated subtotal
+
+ID: TC-005
+## Title: Remove book from cart
+## Pre-conditions:
+Cart contains at least one book
+## Steps:
+i.Open the cart
+ii.Click “Remove” on a book
+## Expected Result: 
+Book disappears from cart; subtotal updates
+## Post-conditions: 
+app.cart  updated
+## Evidence: 
+Screenshot showing updated or empty cart
+
+
+
 
 
 
