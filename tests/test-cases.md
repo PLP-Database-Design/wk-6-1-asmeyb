@@ -40,7 +40,7 @@ Tools Used:	 Chrome DevTools (Performance)
 |T14|Admin Role Persistence	|Verify admin access persists after reload|	Admin retains access|	Works as expected|	Passed	|FR-M03|
 |T15|Checkout Wizard Navigation|	Verify navigation between steps works|	Can move Next/Back smoothly	|Works as expected|	Passed|FR-O02|
 |T16|Book Details|Verify details page shows title, author|All details visible; related section loads|Works as expected|Passed|FR-M01|
-|T17|Lazy Image Loading|Verify images load only in viewport with alt text|Images load on scroll; alt text includes title + author|||FR-X02|
+|T17|Lazy Image Loading|Verify images load only in viewport with alt text|Images load on scroll; alt text includes title + author|worked as expected| passed|FR-X02|
 |T18|Notifications Badge|Verify unread count updates on new notification|Badge increments properly|Works as expected|Passed|FR-N01|
 |T19|Responsive Layout|Verify layout across mobile, tablet, desktop|All components aligned correctly|Works as expected|Passed|FR-X03|
 |T20|Compatibility|Verify cross-browser support (Chrome, Firefox, Safari, Edge)|Layout consistent across browsers|Works as expected|Passed|FR-X03|
