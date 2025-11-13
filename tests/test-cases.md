@@ -7,6 +7,18 @@ The focus was on core shopping flows (catalog → cart → checkout → payment 
 Testing covered  paths aligned with the defined Functional Requirement (FR) codes.
 
 ---
+## TEST ENVIROMENT
+Environment	Staging: 
+Browser(s)	:Chrome , Firefox , Safari,Microsoft Edge .
+
+OS:	Windows 10 / Android 
+
+Payment Gateway:	Paystack
+
+Tools Used:	 Chrome DevTools (Performance)
+
+---
+
 
 ## TEST CASES
 
