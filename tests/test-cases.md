@@ -51,6 +51,48 @@ Tools Used:	 Chrome DevTools (Performance)
 |T25|Order Lifecycle|Verify status transitions Pending→Paid→Fulfilled→Delivered|Each step reflected in order history|Works as expected|Passed|FR-O05|
 |T26|Security Hygiene|Verify user-generated content sanitized||||FR-X04|
 
+| ID  | Feature                      | Objective                                              | Expected Result                                         | Actual Result     | Status | Risk Link      |
+| --- | ---------------------------- | ------------------------------------------------------ | ------------------------------------------------------- | ----------------- | ------ | -------------- |
+| T27 | Catalog Search               | Verify search is case-insensitive and trims whitespace | Matching books displayed; empty query returns full list | Works as expected | Passed | FR-M01         |
+| T28 | Filter by Genre              | Verify selecting a genre filters catalog               | Only books of selected genre shown                      | Works as expected | Passed | FR-M01         |
+| T29 | Filter by Price              | Verify price band filter applies correctly             | Only books within range displayed                       | Works as expected | Passed | FR-M01         |
+| T30 | Filter by Rating             | Verify rating filter applies correctly                 | Only books with selected rating shown                   | Works as expected | Passed | FR-M01         |
+| T31 | Sort by Price                | Verify sort order low→high & high→low                  | Books ordered correctly                                 | Works as expected | Passed | FR-M01         |
+| T32 | Sort by Rating               | Verify sort by highest rating first                    | Highest rated books appear first                        | Works as expected | Passed | FR-M01         |
+| T33 | Sort by Popularity           | Verify popularity sort adjusts correctly               | Most popular books first                                | Works as expected | Passed | FR-M01         |
+| T34 | Book Details Images          | Verify multiple images load with alt text              | All images load lazy, alt includes title+author         | Works as expected | Passed | FR-M01, FR-X02 |
+| T35 | Out-of-Stock Restriction     | Verify “Buy Now” disabled for stock=0                  | Button disabled, warning displayed                      | Works as expected | Passed | FR-M01         |
+| T36 | Cart Quantity Validation     | Verify quantity cannot exceed stock                    | Quantity capped at stock limit; error message           | Works as expected | Passed | FR-O01         |
+| T37 | Cart Persistence             | Verify cart survives page reload                       | Cart items remain after refresh                         | Works as expected | Passed | FR-O01         |
+| T38 | Subtotal Calculation         | Verify subtotal updates for multiple items             | Subtotal = sum(price × qty)                             | Works as expected | Passed | FR-O01         |
+| T39 | Shipping Calculation         | Verify shipping fee added correctly                    | Total = subtotal + shipping + tax                       | Works as expected | Passed | FR-O02         |
+| T40 | Tax Calculation              | Verify tax computed at 8% of subtotal                  | Tax = subtotal × 0.08, rounded 2dp                      | Works as expected | Passed | FR-O02         |
+| T41 | Coupon Valid                 | Verify valid coupon reduces total                      | Total reflects discount                                 | Works as expected | Passed | FR-O02         |
+| T42 | Coupon Invalid/Expired       | Verify invalid/expired coupon rejected                 | Error message displayed, total unchanged                | Works as expected | Passed | FR-O02         |
+| T43 | Coupon Combinability         | Verify non-combinable coupons blocked                  | Only allowed coupons applied                            | Works as expected | Passed | FR-O02         |
+| T44 | Checkout Wizard Navigation   | Verify Next/Back preserves input                       | User input retained, navigation smooth                  | Works as expected | Passed | FR-O02         |
+| T45 | Checkout Form Validation     | Verify required fields enforced                        | Error messages displayed, aria-live polite              | Works as expected | Passed | FR-O02         |
+| T46 | Payment Success              | Verify successful Paystack payment updates order       | Order status = Paid; reference stored                   | Works as expected | Passed | FR-O03         |
+| T47 | Payment Cancel               | Verify cancel returns user to cart safely              | Order remains Pending; retry allowed                    | Works as expected | Passed | FR-O03         |
+| T48 | Payment Error                | Verify error handling for failed payment               | Error banner shown; order remains Pending               | Works as expected | Passed | FR-O03         |
+| T49 | Order History Display        | Verify user sees list of previous orders               | All past orders displayed correctly                     | Works as expected | Passed | FR-O04         |
+| T50 | Order Details                | Verify order detail page shows items, totals, shipping | All details visible, dates ISO8601                      | Works as expected | Passed | FR-O04         |
+| T51 | CSV Export                   | Verify admin can export orders to CSV                  | CSV opens in Excel/Sheets, decimals correct             | Works as expected | Passed | FR-O04         |
+| T52 | Order Status Transition      | Verify status changes Pending→Paid→Fulfilled→Delivered | Statuses updated sequentially                           | Works as expected | Passed | FR-O05         |
+| T53 | Return Window                | Verify returns allowed within 7 days                   | Return accepted; day 8 defect intentionally             | Works as expected | Passed | FR-R01         |
+| T54 | Refund Processing            | Verify admin processes refund & logs audit             | Refund reflected; audit entry exists                    | Works as expected | Passed | FR-R02         |
+| T55 | Review Submission            | Verify only purchasers can submit review               | Non-purchasers blocked; purchaser allowed               | Works as expected | Passed | FR-U01         |
+| T56 | Review Duplicate             | Verify one review per user/book                        | Second review attempt blocked                           | Works as expected | Passed | FR-U01         |
+| T57 | Review Sanitization          | Verify scripts stripped from review                    | No script executed; safe content displayed              | Works as expected | Passed | FR-S01         |
+| T58 | Review Flagging              | Verify user can report review                          | Reported review appears in moderation queue             | Works as expected | Passed | FR-U02         |
+| T59 | Q&A Safe Markdown            | Verify allowed markdown works; unsafe blocked          | `https:` links allowed; `javascript:` blocked           | Works as expected | Passed | FR-U03, FR-S01 |
+| T60 | Admin Unauthorized Access    | Verify non-admin blocked from /admin                   | Unauthorized message displayed                          | Works as expected | Passed | FR-M03         |
+| T61 | Admin Catalog CRUD           | Verify admin can create/update/delete books            | Changes reflected in catalog                            | Works as expected | Passed | FR-M01         |
+| T62 | Admin Inventory Adjustment   | Verify stock edits trigger low-stock notice            | Notice visible; catalog updated                         | Works as expected | Passed | FR-M02         |
+| T63 | Notification Badge Increment | Verify unread badge increments on new alert            | Badge shows correct count                               | Works as expected | Passed | FR-N01         |
+| T64 | Mark All Read (Defect)       | Verify mark-all-read updates badge                     | Badge resets to zero (known defect)                     | Failed            | FR-N02 |                |
+| T65 | Keyboard Navigation          | Verify Tab navigation across UI elements               | Focus moves correctly                                   | Works as expected | FR-X01 |                |
+| T66 | Lazy Image Loading           | Verify images load only in viewport                    | Images lazy-load; LCP ≤ 2.5s                            | Works as expected | FR-X02 |                |
 
 ---
 |Metric	|Count|
