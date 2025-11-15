@@ -50,8 +50,6 @@ Tools Used:	 Chrome DevTools (Performance)
 |T24|Refund Audit Trail|Verify refund recorded with audit entry|Refund appears; audit entry logged|||FR-R02|
 |T25|Order Lifecycle|Verify status transitions Pending→Paid→Fulfilled→Delivered|Each step reflected in order history|Works as expected|Passed|FR-O05|
 |T26|Security Hygiene|Verify user-generated content sanitized||||FR-X04|
-
-| ID  | Feature                      | Objective                                              | Expected Result                                         | Actual Result     | Status | Risk Link      |
 | --- | ---------------------------- | ------------------------------------------------------ | ------------------------------------------------------- | ----------------- | ------ | -------------- |
 | T27 | Catalog Search               | Verify search is case-insensitive and trims whitespace | Matching books displayed; empty query returns full list | Works as expected | Passed | FR-M01         |
 | T28 | Filter by Genre              | Verify selecting a genre filters catalog               | Only books of selected genre shown                      | Works as expected | Passed | FR-M01         |
