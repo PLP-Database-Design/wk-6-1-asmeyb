@@ -86,8 +86,8 @@ Tools Used:	 Chrome DevTools (Performance)
 | T60 | Admin Unauthorized Access    | Verify non-admin blocked from /admin                   | Unauthorized message displayed                          | Works as expected | Passed | FR-M03         |
 | T61 | Admin Catalog CRUD           | Verify admin can create/update/delete books            |   Admin cannot create/update/delete books       |Does not work as expected  | Failed | FR-M01       |
 | T62 | Admin Inventory Adjustment   | Verify stock edits trigger low-stock notice            |Admin cannot verify or edit stocks                        |Does not work as expected  | Failed | FR-M02 |
-| T63 | Mark All Read (Defect)       | Verify mark-all-read updates badge                     | Badge resets to zero (known defect)        |    Worked as expected         | Failed            | FR-N02 |
-| T64 | Keyboard Navigation          | Verify Tab navigation across UI elements               | Focus moves correctly                                   | Works as expected |Failed |FR-X01 |                
+| T63 | Mark All Read (Defect)       | Verify mark-all-read updates badge                     | Badge resets to zero (known defect)        |    Worked as expected         | Passed           | FR-N02 |
+| T64 | Keyboard Navigation          | Verify Tab navigation across UI elements               | Focus moves correctly                                   | Works as expected |Passed|FR-X01 |                
 
 
 ---
