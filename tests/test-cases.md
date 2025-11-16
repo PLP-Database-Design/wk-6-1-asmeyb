@@ -52,12 +52,12 @@ Tools Used:	 Chrome DevTools (Performance)
 |T26|Security Hygiene|Verify user-generated content sanitized||||FR-X04|
 | T27 | Catalog Search               | Verify search is case-insensitive and trims whitespace | Matching books displayed; empty query returns full list | Works as expected | Passed | FR-M01         |
 | T28 | Filter by Genre              | Verify selecting a genre filters catalog               | Does                     | Works as expected | Passed | FR-M01         |
-| T29 | Filter by Price              | Verify price band filter applies correctly             | Only books within range displayed                       | Works as expected | Passed | FR-M01         |
-| T30 | Filter by Rating             | Verify rating filter applies correctly                 | Only books with selected rating shown                   | Works as expected | Passed | FR-M01         |
-| T31 | Sort by Price                | Verify sort order low→high & high→low                  | Books ordered correctly                                 | Works as expected | Passed | FR-M01         |
-| T32 | Sort by Rating               | Verify sort by highest rating first                    | Highest rated books appear first                        | Works as expected | Passed | FR-M01         |
-| T33 | Sort by Popularity           | Verify popularity sort adjusts correctly               | Most popular books first                                | Works as expected | Passed | FR-M01         |
-| T34 | Book Details Images          | Verify multiple images load with alt text              | All images load lazy, alt includes title+author         | Works as expected | Passed | FR-M01, FR-X02 |
+| T29 | Filter by Price              | Verify price band filter applies correctly             | Only books within range displayed                       |  Does not work as expected | Failed| FR-M01         |
+| T30 | Filter by Rating             | Verify rating filter applies correctly                 | Only books with selected rating shown                   |  Does not work as expected | Failed | FR-M01         |
+| T31 | Sort by Price                | Verify sort order low→high & high→low                  | Books ordered correctly                                 |  Does not work as expected | Failed | FR-M01         |
+| T32 | Sort by Rating               | Verify sort by highest rating first                    | Highest rated books appear first                        |  Does not work as expected | Failed | FR-M01         |
+| T33 | Sort by Popularity           | Verify popularity sort adjusts correctly               | Most popular books first                                | Does not work as expected |Failed | FR-M01         |
+| T34 | Book Details Images          | Verify multiple images load with alt text              | All images load lazy, alt includes title+author         |   Does not work as expected|  Failed| FR-M01, FR-X02 |
 | T35 | Out-of-Stock Restriction     | Verify “Buy Now” disabled for stock=0                  |    No restriction on the stock           | Does not work as expected | Failed | FR-M01         |
 | T36 | Cart Quantity Validation     | Verify quantity cannot exceed stock                    | No quantity validation        | Does not works as expected | Failed | FR-O01         |
 | T37 | Cart Persistence             | Verify cart survives page reload                       | Cart items remain after refresh                         | Works as expected | Passed | FR-O01         |
@@ -85,9 +85,8 @@ Tools Used:	 Chrome DevTools (Performance)
 | T59 | Q&A Safe Markdown            | Verify allowed markdown works; unsafe blocked          | No Q&A safe Markdown         | Does not work as expected | Failed | FR-U03, FR-S01 |
 | T60 | Admin Unauthorized Access    | Verify non-admin blocked from /admin                   | Unauthorized message displayed                          | Works as expected | Passed | FR-M03         |
 | T61 | Admin Catalog CRUD           | Verify admin can create/update/delete books            |   Admin cannot create/update/delete books       |Does not work as expected  | Failed | FR-M01       |
-| T62 | Admin Inventory Adjustment   | Verify stock edits trigger low-stock notice            |Admin cannot verify or edit stocks                        |Does not work as expected  | Failed | FR-M02         |
-        |
-| T63 | Mark All Read (Defect)       | Verify mark-all-read updates badge                     | Badge resets to zero (known defect)                     | Failed            | FR-N02 |                |
+| T62 | Admin Inventory Adjustment   | Verify stock edits trigger low-stock notice            |Admin cannot verify or edit stocks                        |Does not work as expected  | Failed | FR-M02 |
+| T63 | Mark All Read (Defect)       | Verify mark-all-read updates badge                     | Badge resets to zero (known defect)                     | Failed            | FR-N02 |
 | T64 | Keyboard Navigation          | Verify Tab navigation across UI elements               | Focus moves correctly                                   | Works as expected | FR-X01 |                
 
 
