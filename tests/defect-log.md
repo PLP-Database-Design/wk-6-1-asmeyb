@@ -1,88 +1,34 @@
 # 🐞 Defect Log – Book Store App QA Project  
-**Team:** `&lt;your-team-name&gt;`  
-**Current as of:** 2025-11-11  
+**Team:** PLP TESTERS  
+**Current as of:** 2025-11-16  
 **Environment:** Local dev, Chrome 130, macOS 14, commit `bfb73f8`
 
-| ID | Summary | Severity | Priority | Affected FR(s) | Status |
-|----|---------|----------|----------|----------------|--------|
-| BUG-SRCH-01 | Search trims trailing spaces but **not leading spaces** → still returns 0 hits | Minor | Medium | FR-C01 | NEW |
-| BUG-RED-01 | Root → /catalog redirect issues **302** instead of **React-Router replace**; causes flash of white | Minor | Low | FR-C01 | NEW |
-| BUG-CART-01 | Cart badge increments **before** async stock check → allows oversell | Major | High | FR-O03 | NEW |
-| BUG-CART-02 | Subtotal calculation uses **floating-point** → $19.994 shown instead of $19.99 | Major | High | FR-O02 | NEW |
-| BUG-CART-03 | “Remove” button **missing aria-label** → a11y violation WCAG 2.1.1 | Minor | Medium | FR-X01 | NEW |
-
----
-
-## Detailed Reports
-
-### BUG-SRCH-01
-- **Steps**  
-  1. Navigate to `/catalog`.  
-  2. Enter query with **leading** space: `" the Great gatsby"`.  
-  3. Press Enter.  
-- **Expected**  
-  Same result set as `"the Great gatsby"` (case-insensitive, trimmed).  
-- **Actual**  
-  0 results; leading space sent to API.  
-- **Evidence**  
-  Screenshot: `evidence/bug-srch-01-leading-space.png`  
-- **Notes**  
-  Quick fix: `trimStart()` in `SearchBar.jsx` line 42.
-
----
-
-### BUG-RED-01
-- **Steps**  
-  1. Open fresh tab at `/`.  
-- **Expected**  
-  Seamless client-side redirect; no network round-trip.  
-- **Actual**  
-  302 from server, then JS redirect → white flash ~200 ms.  
-- **Evidence**  
-  Network timing HAR: `evidence/bug-red-01-flash.har`  
-- **Notes**  
-  Use `&lt;Navigate replace /&gt;` instead of `res.redirect(302)`.
-
----
-
-### BUG-CART-01
-- **Steps**  
-  1. Set book stock = 1 in seed.  
-  2. Two tabs open; both click “Buy Now” simultaneously.  
-- **Expected**  
-  Second tab receives stock-out toast.  
-- **Actual**  
-  Both tabs show “1 item in cart”; badge increments; oversell possible.  
-- **Evidence**  
-  Screen recording: `evidence/bug-cart-01-oversell.mp4`  
-- **Notes**  
-  Race between `localStorage` event and optimistic UI. Needs pessimistic lock.
-
----
-
-### BUG-CART-02
-- **Steps**  
-  1. Add book priced $9.997 (test seed).  
-  2. Change qty to 2.  
-- **Expected**  
-  Subtotal = $19.99 (rounded to currency minor units).  
-- **Actual**  
-  Subtotal shows $19.994.  
-- **Evidence**  
-  Screenshot: `evidence/bug-cart-02-float-rounding.png`  
-- **Notes**  
-  Replace `parseFloat` with `toMinorUnits` utility already in repo.
-
----
-
-### BUG-CART-03
-- **Steps**  
-  1. Run axe-core on `/cart`.  
-- **Expected**  
-  0 violations.  
-- **Actual**  
-  “Buttons must have accessible name” on Remove `&lt;button&gt;`.  
-- **Evidence**  
-  axe report: `evidence/bug-cart-03-axe.json`  
-- **Notes**  
-  Add `aria-label="Remove {{title}} from cart"` dynamically.
+| Defect ID | Summary | Severity | Priority | Environment | Affected FR(s) | Steps to Reproduce | Expected Result | Actual Result |
+|-----------|---------|----------|----------|-------------|----------------|--------------------|-----------------|----------------|
+| BUG-21 | Admin cannot update order statuses | Major | High | Chrome/Windows 10 | FR-M03 | 1. Login as admin <br> 2. Go to Orders Dashboard <br> 3. Change order status | Status should update and reflect | Status does not change |
+| BUG-22 | Admin cannot moderate reviews | Major | High | Chrome/Windows 10 | FR-U02 | 1. Login as admin <br> 2. Navigate to Reviews <br> 3. Approve/remove flagged review | Review state should update | No moderation update |
+| BUG-24 | Refund audit trail missing | Major | High | Chrome/Windows 10 | FR-R02 | 1. Process refund <br> 2. Check audit logs | Refund audit entry recorded | No audit trail available |
+| BUG-25 | Fulfilled/Delivered not reflected in order history | Major | Medium | Chrome/Windows 10 | FR-O05 | 1. Update order through all lifecycle states <br> 2. View order history | All states should appear | Fulfilled/Delivered missing |
+| BUG-28 | Genre filter not working | Minor | Medium | Chrome/Windows 10 | FR-M01 | 1. Open catalog <br> 2. Select a genre | Catalog filtered by genre | No change applied |
+| BUG-29 | Price filter not working | Minor | Medium | Chrome/Windows 10 | FR-M01 | 1. Open catalog <br> 2. Apply price filter | Catalog filtered by price | No price filtering |
+| BUG-30 | Rating filter not working | Minor | Medium | Chrome/Windows 10 | FR-M01 | 1. Open catalog <br> 2. Apply rating filter | List sorted by rating | No rating filtering |
+| BUG-31 | Price sorting not working | Minor | Medium | Chrome/Windows 10 | FR-M01 | 1. Sort by price <br> 2. Select low→high or high→low | Sorted correctly | No sorting applied |
+| BUG-32 | Rating sorting not working | Minor | Medium | Chrome/Windows 10 | FR-M01 | 1. Sort by rating | Items sorted by rating | Sorting not working |
+| BUG-33 | Popularity sorting not working | Minor | Medium | Chrome/Windows 10 | FR-M01 | 1. Sort by popularity | Popular books appear first | Sorting fails |
+| BUG-34 | Multi-image alt text inaccurate | Minor | Medium | Chrome/Windows 10 | FR-M01, FR-X02 | 1. Open book details <br> 2. Inspect all images | All images load with correct alt | Alt text/loading incorrect |
+| BUG-35 | Buy Now not disabled for out-of-stock items | Major | High | Chrome/Windows 10 | FR-M01 | 1. View out-of-stock product | Buy Now disabled | Button enabled |
+| BUG-36 | Quantity exceeds stock | Major | High | Chrome/Windows 10 | FR-O01 | 1. Add item to cart <br> 2. Increase qty beyond stock | Qty capped at stock | Qty allowed above stock |
+| BUG-41 | Valid coupon not applying | Major | High | Chrome/Windows 10 | FR-O02 | 1. Go to checkout <br> 2. Apply valid coupon | Discount applies | No coupon section |
+| BUG-42 | Invalid/Expired coupon not rejected | Major | High | Chrome/Windows 10 | FR-O02 | 1. Apply invalid coupon | Error shown | No coupon section |
+| BUG-43 | Coupon combinability not enforced | Major | High | Chrome/Windows 10 | FR-O02 | 1. Apply multiple coupons | Non-combinable blocked | Coupon system missing |
+| BUG-49 | Order history incomplete | Major | Medium | Chrome/Windows 10 | FR-O04 | 1. View Order History | All past orders displayed | Not all orders shown |
+| BUG-51 | CSV export not working | Major | Medium | Chrome/Windows 10 | FR-O04 | 1. Go to Admin Orders <br> 2. Click Export CSV | CSV file generated | No CSV exported |
+| BUG-53 | Return window not enforced | Major | Medium | Chrome/Windows 10 | FR-R01 | 1. Attempt return <7 days | Return permitted | No return logic |
+| BUG-54 | Refund processing not available | Major | High | Chrome/Windows 10 | FR-R02 | 1. Process refund | Refund + audit recorded | Admin cannot process refund |
+| BUG-55 | Review submission unavailable | Major | High | Chrome/Windows 10 | FR-U01 | 1. Purchase book <br> 2. Attempt review | Review form appears | No review section |
+| BUG-56 | Duplicate review check missing | Major | Medium | Chrome/Windows 10 | FR-U01 | 1. Submit review twice | Second review blocked | No review system |
+| BUG-57 | Review sanitization missing | Major | High | Chrome/Windows 10 | FR-S01 | 1. Submit review with `<script>` | Script stripped | No review feature |
+| BUG-58 | Review flagging missing | Major | Medium | Chrome/Windows 10 | FR-U02 | 1. Try flagging a review | Review flagged | No review module |
+| BUG-59 | Q&A safe markdown missing | Major | High | Chrome/Windows 10 | FR-U03, FR-S01 | 1. Create Q&A post with markdown | Safe markdown rendered | No Q&A feature |
+| BUG-61 | Admin cannot perform Catalog CRUD | Major | High | Chrome/Windows 10 | FR-M01 | 1. Login admin <br> 2. Try create/update/delete | CRUD operations work | Admin CRUD missing |
+| BUG-62 | Inventory adjustment not available | Major | High | Chrome/Windows 10 | FR-M02 | 1. Admin edits stock levels | Low-stock indicator updates | No stock controls |
