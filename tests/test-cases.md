@@ -97,7 +97,7 @@ Tools Used:	 Chrome DevTools (Performance)
 |Passed|	38|
 |Failed| 26|
 |Not Executed	|0|
-Pass Percentage|	77%|
+Pass Percentage|	59%|
 
 
 
