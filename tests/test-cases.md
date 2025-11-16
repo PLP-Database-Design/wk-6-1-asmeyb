@@ -94,9 +94,9 @@ Tools Used:	 Chrome DevTools (Performance)
 |Metric	|Count|
 |--------|-----|
 |Total Test Cases|	64|
-|Passed|	20|
-|Failed| |
-|Not Executed	|6|
+|Passed|	38|
+|Failed| 26|
+|Not Executed	|0|
 Pass Percentage|	77%|
 
 
