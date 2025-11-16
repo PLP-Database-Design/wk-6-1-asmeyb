@@ -49,13 +49,13 @@ Tools Used:	 Chrome DevTools (Performance)
 |T23|Admin Authorization|Verify non-admin blocked from /admin|Unauthorized message displayed|Work as expected|Passed|FR-M03|
 |T24|Refund Audit Trail|Verify refund recorded with audit entry|Audit trail not availabla|Does not work as expected|failed|FR-R02|
 |T25|Order Lifecycle|Verify status transitions Pending→Paid→Fulfilled→Delivered|fulfilled and delivered not reflected in order history|Does not work as expected|Passed|FR-O05|
-|T26|Security Hygiene|Verify user-generated content sanitized||||FR-X04|
+|T26|Security Hygiene|Verify user-generated content sanitized|No malicious scripts rendered|Works as expected|Passes|FR-X04|
 | T27 | Catalog Search               | Verify search is case-insensitive and trims whitespace | Matching books displayed; empty query returns full list | Works as expected | Passed | FR-M01         |
-| T28 | Filter by Genre              | Verify selecting a genre filters catalog               | Does                     | Works as expected | Passed | FR-M01         |
-| T29 | Filter by Price              | Verify price band filter applies correctly             | Only books within range displayed                       |  Does not work as expected | Failed| FR-M01         |
-| T30 | Filter by Rating             | Verify rating filter applies correctly                 | Only books with selected rating shown                   |  Does not work as expected | Failed | FR-M01         |
-| T31 | Sort by Price                | Verify sort order low→high & high→low                  | Books ordered correctly                                 |  Does not work as expected | Failed | FR-M01         |
-| T32 | Sort by Rating               | Verify sort by highest rating first                    | Highest rated books appear first                        |  Does not work as expected | Failed | FR-M01         |
+| T28 | Filter by Genre              | Verify selecting a genre filters catalog               | Does not support filtering by genre                   | Does not work as expected| Failed | FR-M01         |
+| T29 | Filter by Price              | Verify price band filter applies correctly             | Does not support filter by price                       |  Does not work as expected | Failed| FR-M01         |
+| T30 | Filter by Rating             | Verify rating filter applies correctly                 |          Does not support filter by rating       |  Does not work as expected | Failed | FR-M01         |
+| T31 | Sort by Price                | Verify sort order low→high & high→low                  |   Does not support sorting by price                              |  Does not work as expected | Failed | FR-M01         |
+| T32 | Sort by Rating               | Verify sort by highest rating first                    | Does not sort by rating                        |  Does not work as expected | Failed | FR-M01         |
 | T33 | Sort by Popularity           | Verify popularity sort adjusts correctly               | Most popular books first                                | Does not work as expected |Failed | FR-M01         |
 | T34 | Book Details Images          | Verify multiple images load with alt text              | All images load lazy, alt includes title+author         |   Does not work as expected|  Failed| FR-M01, FR-X02 |
 | T35 | Out-of-Stock Restriction     | Verify “Buy Now” disabled for stock=0                  |    No restriction on the stock           | Does not work as expected | Failed | FR-M01         |
