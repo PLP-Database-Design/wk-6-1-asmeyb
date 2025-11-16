@@ -49,7 +49,7 @@ Tools Used:	 Chrome DevTools (Performance)
 |T23|Admin Authorization|Verify non-admin blocked from /admin|Unauthorized message displayed|Work as expected|Passed|FR-M03|
 |T24|Refund Audit Trail|Verify refund recorded with audit entry|Audit trail not availabla|Does not work as expected|failed|FR-R02|
 |T25|Order Lifecycle|Verify status transitions Pending→Paid→Fulfilled→Delivered|fulfilled and delivered not reflected in order history|Does not work as expected|Passed|FR-O05|
-|T26|Security Hygiene|Verify user-generated content sanitized|No malicious scripts rendered|Works as expected|Passes|FR-X04|
+|T26|Security Hygiene|Verify user-generated content sanitized|No malicious scripts rendered|Works as expected|Passed|FR-X04|
 | T27 | Catalog Search               | Verify search is case-insensitive and trims whitespace | Matching books displayed; empty query returns full list | Works as expected | Passed | FR-M01         |
 | T28 | Filter by Genre              | Verify selecting a genre filters catalog               | Does not support filtering by genre                   | Does not work as expected| Failed | FR-M01         |
 | T29 | Filter by Price              | Verify price band filter applies correctly             | Does not support filter by price                       |  Does not work as expected | Failed| FR-M01         |
@@ -86,8 +86,8 @@ Tools Used:	 Chrome DevTools (Performance)
 | T60 | Admin Unauthorized Access    | Verify non-admin blocked from /admin                   | Unauthorized message displayed                          | Works as expected | Passed | FR-M03         |
 | T61 | Admin Catalog CRUD           | Verify admin can create/update/delete books            |   Admin cannot create/update/delete books       |Does not work as expected  | Failed | FR-M01       |
 | T62 | Admin Inventory Adjustment   | Verify stock edits trigger low-stock notice            |Admin cannot verify or edit stocks                        |Does not work as expected  | Failed | FR-M02 |
-| T63 | Mark All Read (Defect)       | Verify mark-all-read updates badge                     | Badge resets to zero (known defect)                     | Failed            | FR-N02 |
-| T64 | Keyboard Navigation          | Verify Tab navigation across UI elements               | Focus moves correctly                                   | Works as expected | FR-X01 |                
+| T63 | Mark All Read (Defect)       | Verify mark-all-read updates badge                     | Badge resets to zero (known defect)        |    Worked as expected         | Failed            | FR-N02 |
+| T64 | Keyboard Navigation          | Verify Tab navigation across UI elements               | Focus moves correctly                                   | Works as expected |Failed |FR-X01 |                
 
 
 ---
