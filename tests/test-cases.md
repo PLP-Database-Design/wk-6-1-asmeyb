@@ -44,9 +44,9 @@ Tools Used:	 Chrome DevTools (Performance)
 |T18|Notifications Badge|Verify unread count updates on new notification|Badge increments properly|Works as expected|Passed|FR-N01|
 |T19|Responsive Layout|Verify layout across mobile, tablet, desktop|All components aligned correctly|Works as expected|Passed|FR-X03|
 |T20|Compatibility|Verify cross-browser support (Chrome, Firefox, Safari, Edge)|Layout consistent across browsers|Works as expected|Passed|FR-X03|
-|T21|Orders Dashboard|Verify admin can update order statuses|Status updates reflected in UI|||FR-M03|
-|T22|Review Moderation|Verify admin can approve/remove flagged reviews|Moderation actions applied|||FR-U02|
-|T23|Admin Authorization|Verify non-admin blocked from /admin|Unauthorized message displayed|||FR-M03|
+|T21|Orders Dashboard|Verify admin can update order statuses|Status updates reflected in UI|Does not work as expected|failed|FR-M03|
+|T22|Review Moderation|Verify admin can approve/remove flagged reviews|Moderation actions applied|Does not work as expected|Failed|FR-U02|
+|T23|Admin Authorization|Verify non-admin blocked from /admin|Unauthorized message displayed|Work as expected|Passed|FR-M03|
 |T24|Refund Audit Trail|Verify refund recorded with audit entry|Refund appears; audit entry logged|||FR-R02|
 |T25|Order Lifecycle|Verify status transitions Pending→Paid→Fulfilled→Delivered|Each step reflected in order history|Works as expected|Passed|FR-O05|
 |T26|Security Hygiene|Verify user-generated content sanitized||||FR-X04|
