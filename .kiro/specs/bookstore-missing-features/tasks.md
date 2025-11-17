@@ -1,0 +1,501 @@
+# Implementation Plan
+
+- [x] 1. Extend data models and seed data
+
+
+
+
+
+
+
+
+  - [ ] 1.1 Update books.js with extended fields (genre, rating, popularity, stock, images array, isbn, dimensions, tags, featured)
+
+
+
+    - Add genre field with values: "Fiction", "Non-Fiction", "Mystery", "Romance", "Science Fiction", "Biography"
+    - Add rating field (0-5 stars) to each book
+    - Add popularity field (numeric view/purchase count)
+    - Add stock field with realistic quantities
+    - Add images array with multiple image URLs
+    - Add isbn, dimensions, tags array, and featured boolean
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 11.1, 11.2_
+
+  - [x] 1.2 Create initial coupon data in StoreProvider
+
+
+    - Define sample coupons with various types (percent/fixed)
+    - Include expired, valid, and future-dated coupons for testing
+    - Set combinability rules and minimum basket amounts
+    - _Requirements: 3.1, 3.2, 3.3, 3.4_
+  - [ ] 1.3 Initialize inventory state in StoreProvider
+
+
+
+    - Create inventory array with bookId, stock, lowStockThreshold
+    - Sync initial stock values with books data
+    - Add inventory to StoreContext value
+    - _Requirements: 2.1, 2.2, 9.1, 9.2_
+
+- [ ] 2. Implement filtering and sorting services
+  - [ ] 2.1 Create FilterService.js with filter logic
+    - Implement applyFilters function for search, genre, price range, rating
+    - Use AND logic for combining multiple filters
+    - Handle empty filter states gracefully
+    - Return filtered book array
+    - _Requirements: 1.1, 1.2, 1.3, 1.7_
+  - [ ] 2.2 Add sorting logic to FilterService
+    - Implement applySorting function for price, rating, popularity
+    - Support ascending and descending order
+    - Ensure stable sort with tie-breakers
+    - _Requirements: 1.4, 1.5, 1.6_
+  - [ ] 2.3 Create FilterPanel component
+    - Build genre checkboxes with multi-select
+    - Add price range slider (min/max inputs)
+    - Add rating filter dropdown (minimum rating)
+    - Emit filter changes to parent via callback
+    - Display active filter count badge
+    - _Requirements: 1.1, 1.2, 1.3, 1.7_
+  - [ ] 2.4 Create SortControls component
+    - Build dropdown with sort options (price, rating, popularity)
+    - Add ascending/descending toggle
+    - Highlight active sort option
+    - _Requirements: 1.4, 1.5, 1.6_
+  - [ ] 2.5 Integrate filters and sorting into CatalogPage
+    - Add FilterPanel to sidebar
+    - Add SortControls to header
+    - Manage filter state with useState
+    - Apply filters and sorting to books array with useMemo
+    - Display "no results" message when filters eliminate all books
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8_
+
+- [ ] 3. Implement stock validation
+  - [ ] 3.1 Create InventoryService.js with validation functions
+    - Implement validateCartQuantity to check stock limits
+    - Implement isLowStock to check threshold
+    - Implement getAvailableStock helper
+    - Return validation objects with error messages
+    - _Requirements: 2.1, 2.2, 9.2_
+  - [ ] 3.2 Update StoreProvider addToCart with stock validation
+    - Call validateCartQuantity before adding items
+    - Show error notification if validation fails
+    - Prevent cart update when stock insufficient
+    - Return boolean success indicator
+    - _Requirements: 2.1, 2.4_
+  - [ ] 3.3 Update StoreProvider updateCartQuantity with validation
+    - Validate new quantity against stock
+    - Cap quantity at stock limit if exceeded
+    - Show error message with available quantity
+    - _Requirements: 2.1, 2.4_
+  - [ ] 3.4 Add out-of-stock UI handling in BookCard
+    - Disable "Buy Now" button when stock is 0
+    - Display "Out of Stock" badge
+    - Show "Only X left" message for low stock
+    - _Requirements: 2.2, 9.2_
+  - [ ] 3.5 Add stock validation feedback in CartPage
+    - Display error message when quantity exceeds stock
+    - Show available quantity in error
+    - Disable quantity increase button at stock limit
+    - _Requirements: 2.1, 2.3_
+
+- [ ] 4. Implement coupon system
+  - [ ] 4.1 Create CouponService.js with validation logic
+    - Implement validateCoupon function checking dates, minimum basket, combinability
+    - Implement calculateDiscount for percent and fixed types
+    - Implement applyAllCoupons to calculate total discount
+    - Return validation objects with user-friendly error messages
+    - _Requirements: 3.1, 3.2, 3.3, 3.4_
+  - [ ] 4.2 Create CouponInput component
+    - Build input field with "Apply" button
+    - Display validation errors inline
+    - Show applied coupons as removable chips
+    - Display discount amount for each coupon
+    - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.6_
+  - [ ] 4.3 Add coupon state to CheckoutPage
+    - Manage appliedCoupons array in state
+    - Implement applyCoupon handler with validation
+    - Implement removeCoupon handler
+    - Recalculate totals when coupons change
+    - _Requirements: 3.1, 3.5, 3.6_
+  - [ ] 4.4 Update checkout totals calculation
+    - Calculate subtotal from cart items
+    - Apply all coupon discounts
+    - Calculate shipping fee
+    - Calculate tax on discounted subtotal
+    - Display breakdown with coupon savings highlighted
+    - _Requirements: 3.1, 3.5_
+  - [ ] 4.5 Persist applied coupons in order
+    - Store appliedCoupons array in order object
+    - Display coupon information in order details
+    - Include coupon codes in order confirmation
+    - _Requirements: 3.1, 3.5_
+
+- [ ] 5. Implement order management
+  - [ ] 5.1 Create OrderService.js with lifecycle functions
+    - Implement updateOrderStatus with transition validation
+    - Implement audit trail creation for status changes
+    - Implement getOrderHistory to fetch user orders
+    - Implement exportOrdersToCSV with RFC4180 formatting
+    - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [ ] 5.2 Create OrderStatusTimeline component
+    - Display status progression visually
+    - Highlight current status
+    - Show timestamps for each status
+    - Display audit trail entries
+    - _Requirements: 4.2, 5.4_
+  - [ ] 5.3 Update OrderDetailPage with timeline
+    - Integrate OrderStatusTimeline component
+    - Display gateway reference when status is Paid
+    - Show refund information if applicable
+    - Display all order items with quantities and prices
+    - _Requirements: 4.2, 5.4, 5.5_
+  - [ ] 5.4 Create OrdersPage for order history
+    - Display all user orders in reverse chronological order
+    - Show order ID, date, status, total
+    - Link to order detail page
+    - Filter by status (optional)
+    - _Requirements: 4.1, 4.2_
+  - [ ] 5.5 Implement CSV export functionality
+    - Add "Export CSV" button to admin orders page
+    - Generate CSV with proper headers and formatting
+    - Use dot notation for decimals
+    - Format dates as ISO8601
+    - Trigger browser download
+    - _Requirements: 4.3, 4.4, 4.5_
+
+- [ ] 6. Implement admin order management
+  - [ ] 6.1 Create admin orders dashboard
+    - Display all orders with filters by status
+    - Show order summary cards
+    - Add search by order ID or email
+    - Paginate results for large datasets
+    - _Requirements: 5.1, 5.2, 5.3_
+  - [ ] 6.2 Add order status update UI
+    - Create status dropdown for each order
+    - Validate transitions before allowing change
+    - Show confirmation modal for status changes
+    - Add optional note field for audit trail
+    - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [ ] 6.3 Implement status update handler
+    - Call OrderService.updateOrderStatus
+    - Update orders state in StoreProvider
+    - Show success/error notification
+    - Refresh order list after update
+    - _Requirements: 5.1, 5.2, 5.3, 5.5_
+
+- [ ] 7. Implement returns and refunds
+  - [ ] 7.1 Create ReturnService.js with validation
+    - Implement canRequestReturn checking 7-day window
+    - Calculate days since delivery from audit trail
+    - Implement processRefund with audit logging
+    - Support full and partial refund amounts
+    - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5_
+  - [ ] 7.2 Create ReturnRequestForm component
+    - Display return eligibility status
+    - Show days remaining in return window
+    - Add reason dropdown and text area
+    - Validate form before submission
+    - _Requirements: 6.1, 6.2_
+  - [ ] 7.3 Add return request to OrderDetailPage
+    - Show ReturnRequestForm for eligible orders
+    - Display rejection message if outside window
+    - Submit return request to admin queue
+    - Update order with returnRequest object
+    - _Requirements: 6.1, 6.2_
+  - [ ] 7.4 Create admin refund processing UI
+    - Display pending return requests
+    - Show order details and return reason
+    - Add refund amount input (full/partial)
+    - Add refund reason text area
+    - _Requirements: 6.3, 6.4, 6.5_
+  - [ ] 7.5 Implement refund handler
+    - Call ReturnService.processRefund
+    - Update order status to Refunded
+    - Add audit entry with refund details
+    - Show success notification
+    - _Requirements: 6.3, 6.4, 6.5_
+
+- [ ] 8. Implement review system
+  - [ ] 8.1 Create ReviewService.js with validation
+    - Implement canUserReview checking purchase history
+    - Implement hasUserReviewed checking for duplicates
+    - Implement sanitizeReviewContent using DOMPurify
+    - Implement validateReview combining all checks
+    - _Requirements: 7.1, 7.2, 7.3, 7.4_
+  - [ ] 8.2 Add reviews state to StoreProvider
+    - Initialize reviews array from localStorage
+    - Add addReview, updateReview, deleteReview, flagReview functions
+    - Persist reviews to localStorage
+    - _Requirements: 7.1, 7.6_
+  - [ ] 8.3 Create ReviewForm component
+    - Build star rating input (1-5 stars)
+    - Add title and content text inputs
+    - Validate purchase before allowing submission
+    - Show error if user already reviewed
+    - Sanitize content before submission
+    - _Requirements: 7.1, 7.2, 7.3, 7.4_
+  - [ ] 8.4 Create ReviewList component
+    - Display all reviews for a book
+    - Show star rating, title, content, date
+    - Add "Helpful" button with count
+    - Add "Flag" button for inappropriate content
+    - Show "Verified Purchase" badge
+    - _Requirements: 7.1, 7.5_
+  - [ ] 8.5 Create BookDetailPage with reviews
+    - Display book details with multiple images
+    - Add ReviewForm below book details
+    - Add ReviewList showing all reviews
+    - Calculate and display average rating
+    - _Requirements: 7.1, 7.6, 11.1, 11.2, 11.3, 11.4_
+  - [ ] 8.6 Add review edit and delete functionality
+    - Show edit/delete buttons on user's own reviews
+    - Implement edit modal with pre-filled form
+    - Implement delete confirmation modal
+    - Update reviews state after edit/delete
+    - _Requirements: 7.6_
+
+- [ ] 9. Implement admin catalog management
+  - [ ] 9.1 Create admin catalog CRUD UI
+    - Add "Add Book" button opening modal form
+    - Display books table with edit/delete actions
+    - Create book form with all fields (title, author, price, genre, etc.)
+    - Validate required fields before saving
+    - _Requirements: 8.1, 8.2, 8.3, 8.4_
+  - [ ] 9.2 Implement book creation handler
+    - Generate new book ID
+    - Validate all required fields
+    - Add book to books array in state
+    - Initialize inventory for new book
+    - Show success notification
+    - _Requirements: 8.1, 8.4, 8.5_
+  - [ ] 9.3 Implement book update handler
+    - Load existing book data into form
+    - Validate changes before saving
+    - Update book in books array
+    - Reflect changes immediately in catalog
+    - _Requirements: 8.2, 8.4, 8.5_
+  - [ ] 9.4 Implement book deletion handler
+    - Show confirmation modal with warning
+    - Check for existing cart references
+    - Remove book from books array
+    - Remove from inventory
+    - Handle gracefully if book in active orders
+    - _Requirements: 8.3, 8.4, 8.5_
+
+- [ ] 10. Implement inventory management
+  - [ ] 10.1 Create AdminInventoryPanel component
+    - Display inventory table with book name, current stock, low-stock indicator
+    - Add stock adjustment input for each book
+    - Show low-stock warning badge when below threshold
+    - Add bulk stock update option
+    - _Requirements: 9.1, 9.2, 9.4_
+  - [ ] 10.2 Implement stock adjustment handler
+    - Validate new stock value (no negatives)
+    - Update inventory in StoreProvider
+    - Create audit entry for adjustment
+    - Show low-stock notification if below threshold
+    - Persist inventory to localStorage
+    - _Requirements: 9.1, 9.2, 9.3, 9.4_
+  - [ ] 10.3 Add low-stock threshold configuration
+    - Allow admin to set custom threshold per book
+    - Default to 5 if not specified
+    - Update low-stock checks to use custom threshold
+    - _Requirements: 9.2_
+  - [ ] 10.4 Integrate inventory with catalog
+    - Update BookCard to show stock status
+    - Disable "Buy Now" when stock is 0
+    - Show "Low Stock" badge when below threshold
+    - _Requirements: 2.2, 9.5_
+
+- [ ] 11. Implement Q&A system
+  - [ ] 11.1 Create QAService.js with markdown sanitization
+    - Implement sanitizeMarkdown using marked and DOMPurify
+    - Implement validateURL checking for safe protocols
+    - Whitelist only http and https schemes
+    - Block javascript: and data: URLs
+    - _Requirements: 10.1, 10.2, 10.3_
+  - [ ] 11.2 Add Q&A state to StoreProvider
+    - Initialize questions array from localStorage
+    - Add addQuestion, addAnswer, flagQA functions
+    - Persist Q&A to localStorage
+    - _Requirements: 10.1, 10.4_
+  - [ ] 11.3 Create QASection component
+    - Display questions and answers for a book
+    - Add "Ask Question" button opening form
+    - Show markdown-rendered content
+    - Add "Answer" button for each question
+    - Add "Flag" button for inappropriate content
+    - _Requirements: 10.1, 10.4, 10.5_
+  - [ ] 11.4 Create question/answer form
+    - Build textarea with markdown preview
+    - Validate and sanitize content before submission
+    - Show error if unsafe URL detected
+    - Submit question or answer to Q&A state
+    - _Requirements: 10.1, 10.2, 10.3, 10.5_
+  - [ ] 11.5 Add Q&A to BookDetailPage
+    - Integrate QASection component below reviews
+    - Display question count
+    - Sort questions by date (newest first)
+    - _Requirements: 10.1_
+
+- [ ] 12. Implement admin moderation
+  - [ ] 12.1 Create AdminModerationQueue component
+    - Display flagged reviews in table
+    - Display flagged Q&A items in separate table
+    - Show flag reason and reporter
+    - Add approve/remove action buttons
+    - _Requirements: 7.5, 10.4_
+  - [ ] 12.2 Implement review moderation handlers
+    - Implement approveReview removing flag
+    - Implement removeReview deleting from reviews
+    - Update reviews state in StoreProvider
+    - Show success notification
+    - _Requirements: 7.5_
+  - [ ] 12.3 Implement Q&A moderation handlers
+    - Implement approveQA removing flag
+    - Implement removeQA deleting from questions
+    - Update Q&A state in StoreProvider
+    - Show success notification
+    - _Requirements: 10.4_
+  - [ ] 12.4 Add moderation tab to AdminPage
+    - Create tab navigation for Catalog, Inventory, Orders, Moderation
+    - Integrate AdminModerationQueue in Moderation tab
+    - Show count badge for pending items
+    - _Requirements: 7.5, 10.4_
+
+- [ ] 13. Implement book details enhancements
+  - [ ] 13.1 Create BookImageGallery component
+    - Display main image with thumbnail strip
+    - Implement image switching on thumbnail click
+    - Add lazy loading with loading="lazy" attribute
+    - Set explicit width and height for all images
+    - Include alt text with book title and author
+    - _Requirements: 11.1, 11.2, 11.3, 11.4_
+  - [ ] 13.2 Add related books section
+    - Filter books by same genre or author
+    - Display 4-6 related books
+    - Use BookCard component for consistency
+    - _Requirements: 11.5_
+  - [ ] 13.3 Enhance BookDetailPage layout
+    - Integrate BookImageGallery at top
+    - Display book metadata (ISBN, dimensions, tags)
+    - Add related books section at bottom
+    - Ensure responsive layout for mobile
+    - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5_
+
+- [ ] 14. Add audit trail service
+  - [ ] 14.1 Create AuditService.js
+    - Implement createAuditEntry function
+    - Implement getAuditTrail for entity
+    - Generate unique audit entry IDs
+    - Format timestamps as ISO8601
+    - _Requirements: 5.2, 5.3, 6.3, 6.4, 9.4_
+  - [ ] 14.2 Integrate audit logging across services
+    - Add audit entries in OrderService status changes
+    - Add audit entries in ReturnService refunds
+    - Add audit entries in InventoryService adjustments
+    - Ensure all admin actions are logged
+    - _Requirements: 5.2, 5.3, 6.3, 6.4, 9.4_
+
+- [ ] 15. Add notification system enhancements
+  - [ ] 15.1 Create notification helper functions
+    - Implement addNotification with type (success, error, info, warning)
+    - Implement auto-dismiss after 5 seconds
+    - Implement manual dismiss
+    - _Requirements: 2.1, 3.2, 3.3, 3.4, 7.2, 7.3_
+  - [ ] 15.2 Create Toast component
+    - Display notifications as toast messages
+    - Position in top-right corner
+    - Style by notification type
+    - Add close button
+    - Use aria-live for accessibility
+    - _Requirements: 2.1, 3.2, 3.3, 3.4_
+  - [ ] 15.3 Integrate notifications throughout app
+    - Show success toast on cart add
+    - Show error toast on validation failures
+    - Show success toast on order placement
+    - Show success toast on review submission
+    - _Requirements: 2.1, 3.2, 3.3, 3.4_
+
+- [ ] 16. Update routing and navigation
+  - [ ] 16.1 Add new routes to App.js
+    - Add /book/:id route for BookDetailPage
+    - Add /orders route for OrdersPage
+    - Add /admin/inventory route for inventory management
+    - Add /admin/moderation route for moderation queue
+    - _Requirements: All_
+  - [ ] 16.2 Update Navbar with new links
+    - Add "Orders" link for authenticated users
+    - Update admin dropdown with new sections
+    - Show notification badge on admin link for pending moderation
+    - _Requirements: All_
+
+- [ ] 17. Accessibility improvements
+  - [ ] 17.1 Add ARIA labels to interactive elements
+    - Label all buttons with descriptive text
+    - Add aria-label to icon-only buttons
+    - Associate labels with form inputs
+    - _Requirements: All_
+  - [ ] 17.2 Implement focus management
+    - Trap focus in modals
+    - Return focus after modal close
+    - Ensure logical tab order
+    - Add visible focus indicators
+    - _Requirements: All_
+  - [ ] 17.3 Add aria-live regions
+    - Announce cart updates
+    - Announce validation errors
+    - Announce status changes
+    - Use polite for non-critical updates
+    - _Requirements: All_
+
+- [ ] 18. Performance optimizations
+  - [ ] 18.1 Add lazy loading for images
+    - Set loading="lazy" on all book images
+    - Add explicit width/height attributes
+    - Use responsive image sizes
+    - _Requirements: 11.3_
+  - [ ] 18.2 Optimize filter and sort operations
+    - Memoize filtered results with useMemo
+    - Debounce search input (300ms)
+    - Cache sort results when filters unchanged
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6_
+  - [ ] 18.3 Code split admin components
+    - Lazy load admin pages with React.lazy
+    - Show loading spinner during load
+    - Reduce initial bundle size
+    - _Requirements: All admin features_
+
+- [ ] 19. Integration and end-to-end testing
+  - [ ] 19.1 Verify all failed test cases now pass
+    - Run test cases T28-T35 (catalog filters/sorts)
+    - Run test cases T36 (cart quantity validation)
+    - Run test cases T41-T43 (coupons)
+    - Run test cases T49, T51 (order history, CSV)
+    - Run test cases T21, T24, T25 (order management)
+    - Run test cases T53, T54 (returns/refunds)
+    - Run test cases T55-T59 (reviews and Q&A)
+    - Run test cases T61, T62 (admin catalog and inventory)
+    - Run test case T34 (multi-image lazy loading)
+    - _Requirements: All_
+  - [ ] 19.2 Test complete user flows
+    - Browse catalog → filter by genre → sort by price → add to cart
+    - Cart → apply coupon → checkout → payment → order confirmation
+    - View order history → request return → admin processes refund
+    - Purchase book → submit review → edit review
+    - Ask question → receive answer → flag inappropriate content
+    - Admin: add book → adjust stock → update order status → moderate content
+    - _Requirements: All_
+  - [ ] 19.3 Verify data persistence
+    - Reload page and verify cart persists
+    - Verify orders persist across sessions
+    - Verify reviews and Q&A persist
+    - Verify inventory changes persist
+    - _Requirements: All_
+  - [ ] 19.4 Test error handling
+    - Test stock validation errors
+    - Test coupon validation errors
+    - Test return window validation
+    - Test review duplicate detection
+    - Test XSS sanitization
+    - _Requirements: All_

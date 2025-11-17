@@ -48,4 +48,3 @@ export const books = [
     description: "An epic high fantasy adventure"
   }
 ];
-
