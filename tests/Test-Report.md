@@ -1,113 +1,153 @@
 # 📊 Final Test Report – Book Store App QA Project  
 **Team:** PLP Testers  
 **Product Version:** 1.1.0  
-**Report Date:** 2025-11-14  
-**Test Window:** 2025-11-05 → 2025-11-14  
+**Report Date:** November 17, 2025  
+**Test Period:** November 5-14, 2025
 
 ---
 
-## 1. Executive Summary
-React-based Book Store (cart + checkout + Paystack) tested for **9 days**; **26 test cases**, **8 defects logged** (5 intentionally seeded).  
-**100 % FR traceability** achieved; **performance & a11y budgets met**; **two Major / High-priority bugs block release** (oversell & price rounding).
+## 1. EXECUTIVE SUMMARY
+
+### Test Results Overview
+- **Total Test Cases**: 64 (100% executed)
+- **Passed**: 38 (59%)
+- **Failed**: 26 (41%)
+- **Defects Found**: 26 (18 Major, 8 Minor)
+- **Requirements Coverage**: 100% (21/21 FRs tested)
+
+### Key Findings
+✅ **Strengths**: Excellent performance (LCP 2.1s, TTI 0.9s), strong security, 100% browser compatibility  
+❌ **Weaknesses**: 26 missing features across catalog, cart validation, coupons, reviews, and admin functions  
+⚠️ **Risk**: Stock validation missing - overselling risk
+
+### Recommendation
+**CONDITIONAL GO** - Core functionality works, but 18 high-priority defects must be fixed before full production release.
 
 ---
 
-## 2. Test Strategy
-Risk-based focus on:  
-- Cart → Checkout → Payment (business-critical)  
-- WCAG 2.1 AA (legal risk)  
-- LCP ≤ 2.5 s / TTI ≤ 1 s (UX risk)  
-- Latest 2 browsers + responsive (market risk)  
+## 2. TEST COVERAGE
 
-**Techniques:** exploratory, Cypress e2e, axe, Lighthouse CI, OWASP ZAP baseline.
-
----
-
-## 3. Scope & Coverage Overview
-| Category | #Tests | Pass | Fail | Seeded | Cov. |
-|----------|--------|------|------|---------|------|
-| Functional | 18 | 15 | 0 | 3 | 100 % |
-| A11y | 3 | 2 | 0 | 1 | 100 % |
-| Performance | 2 | 2 | 0 | 0 | 100 % |
-| Compatibility | 2 | 2 | 0 | 0 | 100 % |
-| Security | 1 | 0 | 0 | 1 | 100 % |
-| **Total** | **26** | **21** | **0** | **5** | **100 %** |
-
-*(“Fail” = 0; seeded defects are accepted and documented.)*
+| Category | Tests | Passed | Failed | Pass % |
+|----------|-------|--------|--------|--------|
+| Catalog & Search | 12 | 6 | 6 | 50% |
+| Cart Management | 8 | 6 | 2 | 75% |
+| Checkout & Payment | 10 | 7 | 3 | 70% |
+| Order Management | 8 | 4 | 4 | 50% |
+| Returns & Refunds | 3 | 0 | 3 | 0% |
+| Reviews & Q&A | 6 | 0 | 6 | 0% |
+| Admin Functions | 8 | 2 | 6 | 25% |
+| Accessibility | 3 | 2 | 1 | 67% |
+| Performance | 2 | 2 | 0 | 100% |
+| Security | 4 | 4 | 0 | 100% |
 
 ---
 
-## 4. Test Environments & Tools
-- **Local:** `http://localhost:3000` (commit `bfb73f8`)
-- **Staging:** `https://bookstore-staging.netlify.app`
-- **Browsers:** Chrome 142, Firefox 132, Safari 17, Edge 129
-- **Devices:** Win-11 laptop, Samsung A34, iPhone 12 Pro
-- **Mgmt:** Jira Kanban **Automation:** Cypress 13 **A11y:** axe-core 4.9 **Perf:** Lighthouse 11 **Security:** OWASP ZAP 2.14
+## 3. DEFECT SUMMARY
+
+### By Severity
+- **Major**: 18 defects (69%)
+- **Minor**: 8 defects (31%)
+
+### By Feature Area
+- Catalog Filtering/Sorting: 8 defects
+- Reviews & Q&A: 6 defects
+- Admin Functions: 6 defects
+- Order Management: 4 defects
+- Coupon System: 3 defects
+- Cart Validation: 2 defects
+
+### Top 5 Critical Defects
+1. **BUG-36**: Cart allows quantity exceeding stock (Major/High)
+2. **BUG-35**: Buy Now not disabled for out-of-stock (Major/High)
+3. **BUG-41-43**: Coupon system not implemented (Major/High)
+4. **BUG-55-58**: Review system not implemented (Major/High)
+5. **BUG-61**: Admin catalog CRUD missing (Major/High)
 
 ---
 
-## 5. Defect Summary
-| ID | Summary | Severity | Priority | Affected FR | Status |
-|----|---------|----------|----------|-------------|--------|
-| BUG-CART-01 | Stock race allows oversell | **Major** | **High** | FR-O03 | NEW |
-| BUG-CART-02 | Float rounding → $19.994 shown | **Major** | **High** | FR-O02 | NEW |
-| BUG-CART-03 | Remove button lacks aria-label | **Minor** | **Medium** | FR-X01 | NEW |
-| Seeded-01 | Currency mismatch UI vs gateway | **Major** | **High** | FR-O03 | ACCEPTED |
-| Seeded-02 | Return window accepts day 8 | **Minor** | **Low** | FR-R01 | ACCEPTED |
-| Seeded-03 | XSS via markdown link | **Major** | **Medium** | FR-U03/S01 | ACCEPTED |
-| Seeded-04 | Notification badge not updated | **Minor** | **Low** | FR-N02 | ACCEPTED |
-| Seeded-05 | Search ignores diacritics | **Minor** | **Low** | FR-C01 | ACCEPTED |
+## 4. NON-FUNCTIONAL RESULTS
 
-*Evidence & reproduction steps: `tests/defect-log.md`*
+### Performance (Lighthouse)
+- **LCP**: 2.1s (Target: ≤2.5s) ✅
+- **TTI**: 0.9s (Target: ≤1.0s) ✅
+- **Score**: 94/100 ✅
 
----
-
-## 6. Non-Functional Results
 ### Accessibility
-- **axe automated:** 1 violation (BUG-CART-03)  
-- **Manual WCAG 2.1 AA checklist:** 95 % compliant (focus, labels, color contrast OK)
+- **WCAG 2.1 AA**: 95% compliant ✅
+- **Score**: 94/100 ✅
 
-### Performance (Lighthouse avg 3 runs)
-| Metric | Target | Achieved | Status |
-|--------|--------|----------|--------|
-| LCP | ≤ 2.5 s | 2.1 s | ✔ |
-| TTI | ≤ 1.0 s | 0.9 s | ✔ |
-| Accessibility score | ≥ 90 | 94 | ✔ |
+### Security
+- **OWASP ZAP**: No high-severity alerts ✅
+- **XSS Testing**: All blocked ✅
 
-### Compatibility & Security
-- **Cross-browser UI:** zero P1 deviations  
-- **ZAP baseline:** no high-severity alerts; XSS defect intentionally seeded
+### Compatibility
+- **Browsers**: 100% compatible (Chrome, Firefox, Safari, Edge) ✅
+- **Devices**: Works on all tested devices ✅
 
 ---
 
-## 7. Risk Register
-| Risk | Probability | Impact | Mitigation / Owner |
-|------|-------------|--------|--------------------|
-| Oversell on concurrent drop | Medium | High | Implement server-side stock reservation (BE team) |
-| Price display inaccuracy | Low | Medium | Replace float with `toMinorUnits` utility (FE #42) |
-| a11y lawsuit potential | Low | High | Fix aria-label & schedule quarterly external audit |
+## 5. RECOMMENDATIONS
+
+### Must Fix Before Release (P1)
+1. Implement stock validation (BUG-36, BUG-35)
+2. Implement coupon system (BUG-41-43)
+3. Add order status management (BUG-21, BUG-25)
+
+### Should Fix Soon (P2)
+4. Implement catalog filtering (BUG-28-30)
+5. Implement catalog sorting (BUG-31-33)
+6. Add admin catalog CRUD (BUG-61)
+7. Add inventory management (BUG-62)
+
+### Nice to Have (P3)
+8. Implement review system (BUG-55-58)
+9. Implement Q&A system (BUG-59)
+10. Add returns/refunds (BUG-53-54)
 
 ---
 
-## 8. Recommendations
-1. **Resolve Major/High defects BUG-CART-01 & ‑02 before release.**  
-2. Introduce **pessimistic stock lock** at checkout-start to close race window.  
-3. **CI gate:** run Cypress + Lighthouse on every PR (P1 flows budgeted).  
-4. **Expand device matrix** → Chrome-for-Android low-end & 4G throttling.  
-5. **Quarterly a11y re-audit** to maintain WCAG 2.1 AA compliance.
+## 6. GO/NO-GO DECISION
+
+### Release Readiness
+| Criteria | Status |
+|----------|--------|
+| Core Functionality | ✅ Pass |
+| Performance | ✅ Pass |
+| Security | ✅ Pass |
+| Accessibility | ✅ Pass |
+| P1 Defects | ❌ 18 open |
+| Feature Completeness | ❌ 26 missing |
+
+### Decision: **CONDITIONAL GO**
+
+**Options:**
+1. **Delay 2-3 weeks** - Fix P1 defects, full release
+2. **Phased release** - Core features now, rest later
+3. **No-Go** - Too many missing features
 
 ---
 
-## 9. Go / No-Go Statement
-**CONDITIONAL GO** – all P1 user journeys work, performance & security targets met.  
-**NO-GO** if Major/High defects remain open → both violate commercial correctness.
+## 7. APPENDICES
+
+**Related Documents:**
+- [Test Plan](./test-plan.md)
+- [Test Cases](./test-cases.md)
+- [Defect Log](./defect-log.md)
+- [Comprehensive Report](./Comprehensive-Test-Report.md)
+- [Traceability Matrix](./Traceability-matrix.md)
 
 ---
 
-## 10. Appendices
-A. [Traceability Matrix](./traceability-matrix.md)  
-B. [Defect Log](./defect-log.md)  
-C. [Test Cases](./test-cases.md)  
-D. Evidence bundle: `tests/evidence/*` (screens, videos, LH reports, axe JSON)
+## 8. SIGN-OFF
+
+| Role | Name | Signature | Date |
+|------|------|-----------|------|
+| QA Lead | Asmamaw Yismaw | AY | Nov 17, 2025 |
+| Test Engineer | Whitney Shisia | WS | Nov 17, 2025 |
+| Test Engineer | Jostina Mwamburi | JM | Nov 17, 2025 |
+
+**Stakeholder Approval:** ⏳ Pending
 
 ---
+
+**For detailed information, see [Comprehensive-Test-Report.md](./Comprehensive-Test-Report.md)**
