@@ -17,14 +17,14 @@
 | **Closed** | 0 |
 
 ### Defects by Severity
-- 🔴 **Critical**: 0
-- 🟠 **Major**: 18 (69%)
-- 🟡 **Minor**: 8 (31%)
+- 🔴 **Critical**: 2 (8%)
+- 🟠 **Major**: 10 (38%)
+- 🟡 **Minor**: 14 (54%)
 
 ### Defects by Priority
-- 🔥 **High**: 18 (69%)
-- ⚠️ **Medium**: 8 (31%)
-- 📌 **Low**: 0 (0%)
+- 🔥 **High**: 14 (54%)
+- ⚠️ **Medium**: 9 (35%)
+- 📌 **Low**: 3 (12%)
 
 ### Defects by Feature Area
 - **Catalog (Filtering/Sorting)**: 8 defects
@@ -60,30 +60,30 @@
 | Defect ID | Summary | Severity | Priority | Status | Found Date | Affected FR(s) | Root Cause |
 |-----------|---------|----------|----------|--------|------------|----------------|------------|
 | BUG-21 | Admin cannot update order statuses | Major | High | 🔴 Open | 2025-11-10 | FR-M03 | Missing Implementation |
-| BUG-22 | Admin cannot moderate reviews | Major | High | 🔴 Open | 2025-11-10 | FR-U02 | Missing Implementation |
+| BUG-22 | Admin cannot moderate reviews | Minor | Medium | 🔴 Open | 2025-11-10 | FR-U02 | Missing Implementation |
 | BUG-24 | Refund audit trail missing | Major | High | 🔴 Open | 2025-11-10 | FR-R02 | Missing Implementation |
-| BUG-25 | Fulfilled/Delivered states not in order history | Major | Medium | 🔴 Open | 2025-11-10 | FR-O05 | Incomplete Feature |
+| BUG-25 | Fulfilled/Delivered states not in order history | Minor | Medium | 🔴 Open | 2025-11-10 | FR-O05 | Incomplete Feature |
 | BUG-28 | Genre filter not working | Minor | Medium | 🔴 Open | 2025-11-11 | FR-M01 | Missing Implementation |
 | BUG-29 | Price filter not working | Minor | Medium | 🔴 Open | 2025-11-11 | FR-M01 | Missing Implementation |
 | BUG-30 | Rating filter not working | Minor | Medium | 🔴 Open | 2025-11-11 | FR-M01 | Missing Implementation |
 | BUG-31 | Price sorting not working | Minor | Medium | 🔴 Open | 2025-11-11 | FR-M01 | Missing Implementation |
 | BUG-32 | Rating sorting not working | Minor | Medium | 🔴 Open | 2025-11-11 | FR-M01 | Missing Implementation |
 | BUG-33 | Popularity sorting not working | Minor | Medium | 🔴 Open | 2025-11-11 | FR-M01 | Missing Implementation |
-| BUG-34 | Multi-image gallery with lazy loading missing | Minor | Medium | 🔴 Open | 2025-11-11 | FR-M01, FR-X02 | Missing Implementation |
-| BUG-35 | Buy Now button not disabled for out-of-stock items | Major | High | 🔴 Open | 2025-11-12 | FR-M01 | Missing Validation |
-| BUG-36 | Cart allows quantity to exceed available stock | Major | High | 🔴 Open | 2025-11-12 | FR-O01 | Missing Validation |
+| BUG-34 | Multi-image gallery with lazy loading missing | Minor | Low | 🔴 Open | 2025-11-11 | FR-M01, FR-X02 | Missing Implementation |
+| BUG-35 | Buy Now button not disabled for out-of-stock items | Critical | High | 🔴 Open | 2025-11-12 | FR-M01 | Missing Validation |
+| BUG-36 | Cart allows quantity to exceed available stock | Critical | High | 🔴 Open | 2025-11-12 | FR-O01 | Missing Validation |
 | BUG-41 | Coupon system not implemented | Major | High | 🔴 Open | 2025-11-12 | FR-O02 | Missing Implementation |
 | BUG-42 | Coupon validation not implemented | Major | High | 🔴 Open | 2025-11-12 | FR-O02 | Missing Implementation |
 | BUG-43 | Coupon combinability rules not implemented | Major | High | 🔴 Open | 2025-11-12 | FR-O02 | Missing Implementation |
-| BUG-49 | Order history page incomplete | Major | Medium | 🔴 Open | 2025-11-13 | FR-O04 | Incomplete Feature |
-| BUG-51 | CSV export functionality missing | Major | Medium | 🔴 Open | 2025-11-13 | FR-O04 | Missing Implementation |
-| BUG-53 | Return window (7-day) validation missing | Major | Medium | 🔴 Open | 2025-11-13 | FR-R01 | Missing Implementation |
+| BUG-49 | Order history page incomplete | Minor | Medium | 🔴 Open | 2025-11-13 | FR-O04 | Incomplete Feature |
+| BUG-51 | CSV export functionality missing | Minor | Medium | 🔴 Open | 2025-11-13 | FR-O04 | Missing Implementation |
+| BUG-53 | Return window (7-day) validation missing | Minor | Medium | 🔴 Open | 2025-11-13 | FR-R01 | Missing Implementation |
 | BUG-54 | Refund processing functionality missing | Major | High | 🔴 Open | 2025-11-13 | FR-R02 | Missing Implementation |
-| BUG-55 | Review submission system not implemented | Major | High | 🔴 Open | 2025-11-14 | FR-U01 | Missing Implementation |
-| BUG-56 | Duplicate review prevention not implemented | Major | Medium | 🔴 Open | 2025-11-14 | FR-U01 | Missing Implementation |
+| BUG-55 | Review submission system not implemented | Minor | Medium | 🔴 Open | 2025-11-14 | FR-U01 | Missing Implementation |
+| BUG-56 | Duplicate review prevention not implemented | Minor | Low | 🔴 Open | 2025-11-14 | FR-U01 | Missing Implementation |
 | BUG-57 | Review content sanitization not implemented | Major | High | 🔴 Open | 2025-11-14 | FR-S01 | Missing Implementation |
-| BUG-58 | Review flagging functionality missing | Major | Medium | 🔴 Open | 2025-11-14 | FR-U02 | Missing Implementation |
-| BUG-59 | Q&A system with safe markdown not implemented | Major | High | 🔴 Open | 2025-11-14 | FR-U03, FR-S01 | Missing Implementation |
+| BUG-58 | Review flagging functionality missing | Minor | Low | 🔴 Open | 2025-11-14 | FR-U02 | Missing Implementation |
+| BUG-59 | Q&A system with safe markdown not implemented | Minor | Medium | 🔴 Open | 2025-11-14 | FR-U03, FR-S01 | Missing Implementation |
 | BUG-61 | Admin catalog CRUD operations missing | Major | High | 🔴 Open | 2025-11-14 | FR-M01 | Missing Implementation |
 | BUG-62 | Admin inventory adjustment missing | Major | High | 🔴 Open | 2025-11-14 | FR-M02 | Missing Implementation |
 
