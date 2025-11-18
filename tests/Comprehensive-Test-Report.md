@@ -930,9 +930,10 @@ npm run test:a11y       # Accessibility tests
 ---
 
 **Contact Information:**
-- QA Team Email: qa-team@plptesters.com
-- Project Repository: [GitHub Repository URL]
-- Issue Tracker: [Jira Project URL]
+- QA Team Email: asmeyb@gmail.com or Shisiawhitney215@gmail.com or mwamburijostina286@gmail.com
+- Project Repository: [\[GitHub Repository URL\]](https://github.com/PLP-Database-Design/wk-6-1-asmeyb/tree/main)
+- Issue Tracker: [\[Jira Project URL\]](https://asmeyb.atlassian.net/jira/software/projects/KAN/boards/1)
+- Presentation Document [\[Presentation URL\]](https://gamma.app/docs/Comprehensive-Software-Test-Report-wyj5nqu5ympypjs)
 
 **Report Generated:** November 17, 2025  
 **Next Review Date:** November 24, 2025 (Post-Release)
